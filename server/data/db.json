@@ -1,0 +1,572 @@
+{
+  "users": [
+    {
+      "_id": "8302a651ab18c3ebf921a99f",
+      "name": "Sahana Ullagaddi",
+      "email": "sahanaullagaddi28@gmail.com",
+      "password": "$2a$10$URdvXWuaZzLIFspYJjDs..iO9vsI22egvbLB2bbynkQShLCR7ir.K",
+      "xp": 231,
+      "streak": 1,
+      "lastActive": "2026-09-02T14:45:46.580Z",
+      "achievements": [
+        "Fast Learner"
+      ],
+      "createdAt": "2026-09-02T14:45:46.580Z"
+    },
+    {
+      "_id": "9d31a4f746a012bee7804646",
+      "name": "Alex",
+      "email": "alex@studybuddy.ai",
+      "password": "$2a$10$iLFa2NGXWqz2cOXq7bUPp.5fL2DcOKbi4XCl.D1.vdTUlC1J3BVLe",
+      "xp": 320,
+      "streak": 2,
+      "lastActive": "2026-09-07T15:25:32.607Z",
+      "achievements": [
+        "Fast Learner"
+      ],
+      "createdAt": "2026-09-03T05:33:33.526Z"
+    }
+  ],
+  "documents": [
+    {
+      "_id": "bb69203481bcedee51b70915",
+      "title": "Tap_Earn_Page_task_Full_Stack",
+      "fileName": "Tap_Earn_Page_task_Full_Stack.pdf",
+      "fileUrl": "/uploads/1788360887646-818189196.pdf",
+      "fileSize": 565627,
+      "userId": "8302a651ab18c3ebf921a99f",
+      "status": "Ready",
+      "subject": "General",
+      "extractedText": "\n\nVELoop Rewards \nTap & Earn — Complete MERN Full-Stack \nIntern Task \nProduction-oriented implementation specification \n \nProject VELoop Rewards — Tap & Earn \nStack MERN: MongoDB + Express.js + React.js + Node.js \nPlatform body color #161827 \nPrimary visual direction Minimal • Premium • Fintech • Interactive • Trusted \nReference \nUploaded Tap & Earn concept + uploaded Tap League \nscreenshots \nPrimary objective \nBuild the complete frontend + backend, not a static UI \ndemo \n \n1. Task Objective \nBuild the complete VELoop Rewards Tap & Earn module as a production-style MERN feature. The experience must feel \nengaging like a modern tap-to-earn game, but the visual language must remain premium, minimal, trustworthy and \nfintech-oriented. The implementation must include real backend state, server-authoritative reward calculation, secure \ntap processing, upgrade systems, seasonal progression, Tap League ranking, reward history and all required UI \ninteractions. \n2. Non-Negotiable Requirements \n Use MERN stack throughout the feature. \n Frontend must be React.js and responsive for desktop and mobile. \n Backend must be Node.js + Express.js with MongoDB persistence. \n Do not hard-code balances, energy, rank, reward history, upgrades or season data in React. \n Backend is the source of truth for rewards, balances, energy, cooldowns, upgrades and leaderboard scores. \n Every accepted tap must respect a 200 ms minimum processing interval. Frontend must visibly animate every tap \nand provide vibration feedback where supported. \n The 200 ms delay must NOT be the only anti-bot mechanism. Backend must reject impossible tap rates and \nsuspicious sequences. \n The UI must never feel cluttered. Advanced features should be understandable at first glance and expandable \nthrough drawers/modals. \n Use the supplied Tap & Earn visual concept as the structural inspiration, but do not copy another game's branding \nor assets. \n Use the platform body color #161827 as the foundation of the design system. \n3. Core Tap Interaction \nThe central interaction is the VE coin/tap circle. Every tap must feel responsive even though reward processing is \ncontrolled by the backend. \n\nRequirement Implementation \nTap animation \nScale/press effect, glow/ripple, small coin/token burst \nand subtle counter animation. \nHaptic feedback \nUse navigator.vibrate where supported; fail silently on \nunsupported devices. \n200 ms interval \nDo not accept another tap event locally until the 200 ms \ninteraction window is respected. \nServer authority \nClient sends tap request; server validates state and \ndecides reward. \nReward feedback \nShow a compact floating reward such as +1 SVE, +1.2 VE, \n+25 Tokens or +1 Spin. \nNo guaranteed reward per tap \nThe tap animation happens on every accepted tap, but \nreward outcomes follow configured reward probabilities. \nLow-latency feel \nAnimate immediately; reconcile balance/energy with the \nserver response. \nFailed tap \nShow subtle feedback such as 'Too fast' or 'Energy \nempty' without a disruptive modal. \n \n4. Tap Reward Distribution \nUse the following initial reward distribution. These values must be configurable from the backend so the economy can \nbe tuned later without changing frontend code. \nOutcome Initial probability Reward range / rule \nSVE 60% \n1 SVE per rewarded SVE outcome \n(initial configuration) \nVE 20% 0.6 to 1.7 VE \nSpin 2% \n1 spin whenever a spin outcome is \nselected \nGems 5% 0.5, 0.8, 1, 1.2, up to 2 gems \nTokens 13% remainder 5 to 100 tokens \n \nImportant: the listed percentages total 87% before the token remainder. Therefore the backend should define Tokens \nas the remaining 13% so the distribution totals exactly 100%. Do not create an unaccounted reward bucket. \nReward probabilities must be server-side configuration. The client must never decide whether a tap gives SVE, VE, Spin, \nGems or Tokens. \n5. Energy System \nFeature Requirement \nBase energy 500 / 500 \nConsumption \n1 energy per accepted tap before any efficiency rules are \napplied. \nRecharge +20 energy every 20 minutes by default. \nStorage upgrade User can increase maximum capacity by spending VEs. \nRecharge-speed upgrade \nUser can increase recharge speed using the designated \nupgrade currency/tokens. \nZero energy \nDisable accepted taps until energy becomes available or \nthe user uses an eligible recovery option. \nServer calculation \nEnergy regeneration must be calculated from \ntimestamps rather than requiring a request every 20 \nminutes. \n\nCap \nRegenerated energy can never exceed maximum storage \ncapacity. \n \n6. Energy Storage Capacity \nDefault capacity is 500. Users can purchase higher capacity. The exact pricing curve should be configurable. Upgrade \nprices must increase faster than capacity so users cannot create uncontrolled reward inflation. \nSuggested initial progression: 500 → 600 → 700 → 800 → 900 → 1000. Keep the values configurable. \n7. Multitap \nMultitap increases the reward value of an accepted physical tap. Default is x1. Users may upgrade up to x3. The upgrade \nis temporary and remains valid for 7 days from activation/purchase. \nLevel Tap effect Validity \nx1 1x Default \nx2 2x 7 days \nx3 3x 7 days \n \nThe backend must store activation time and expiry time. After expiry, the user automatically falls back to the highest \nnon-expired multiplier. \n8. Recharge Speed \nUsers can upgrade energy recharge speed. Keep the upgrade curve configurable. Do not allow recharge speed to \nbecome unlimited. Suggested initial display: +20/20m → +22/20m → +24/20m → +27/20m → +30/20m. \n9. Tap Streak \nShow the user's current consecutive tap streak. The streak is primarily an engagement mechanic. Use a visible counter \nand a lightweight progress effect. Do not make streak rewards large enough to damage the economy. \n10. Precision Tap \nOccasionally display a small precision target during the tap interaction. A user who taps the target accurately receives \nTokens. The reward amount should be configured by the backend. Precision taps must not bypass normal energy or \nserver validation. \n11. Mystery Tap \nA mystery tap is a special tap outcome that awards SVEs. It should be visually distinct but not excessively flashy. The \nbackend decides when the event is available and the reward amount. \n\n12. Tap Combo \nTap Combo is an animation/engagement layer. It should visually show the user that they are tapping continuously, for \nexample COMBO x12, COMBO x25, COMBO x50. The combo animation itself does not need to create a separate \neconomic reward unless explicitly enabled later. \n13. Boost Windows \nProvide a temporary 30-second boost window. The boost may increase the tap reward according to backend \nconfiguration. It should have a clear countdown, active state and expiry animation. Boost activation must be logged. \n14. Lucky Tap + Spin \nLucky Tap cannot trigger before the user reaches a minimum of 300 accepted taps in the relevant tracking window. \nAfter 300 taps, the backend may randomly trigger a Lucky Tap. The reward interaction is a Spin. \n Show a clear progress indicator toward the 300-tap threshold. \n Before 300 taps, do not display a misleading 'almost lucky' state that implies a guaranteed reward. \n After eligibility, the backend controls the trigger. \n Spin result must be server-generated and recorded in reward history. \n Prevent double-spinning through idempotent server-side processing. \n15. Tap Missions \nCreate daily/seasonal missions that award Tokens. Examples: \n Complete 100 accepted taps. \n Complete 500 accepted taps. \n Reach a target combo. \n Complete a precision tap. \n Use a boost window. \n Return and tap on multiple sessions. \n16. Daily Tap Challenge \nCreate a daily challenge with convenient, controlled rewards. The user should see progress immediately. The challenge \nresets according to the platform's daily reset time. Backend must enforce completion and prevent duplicate claims. \n17. Energy Bank \nUsers can purchase an Energy Bank valid for 3 days. The Energy Bank is a separate temporary energy reserve. The exact \ncapacity and price should be configurable. The UI must clearly show its expiry countdown and remaining capacity. \n18. Energy Shield \nUsers can purchase/activate an Energy Shield using SVEs. Shield duration is 10 seconds. During the active window, \neligible taps do not consume energy. The shield must have a visible countdown and server-side start/expiry \ntimestamps. \n\n19. Tap Efficiency \nTap Efficiency is a temporary seasonal/monthly upgrade. Initial levels: 1.1x, 1.2x and 1.3x. The user's purchased \nefficiency expires when the current Tap Season expires. Do not make it permanent. \nThe frontend must show the current efficiency, current level, upgrade cost and exact expiry date/time. \n20. VE Fragments \nIntroduce VE Fragments as a separate collectible/progression resource. The conversion/value will remain configurable \nand can be decided later. Build the data model and UI so the value can change without a database migration. \n21. Tap Seasons \nA Tap Season is a fixed period during which Tap League ranking and seasonal progression are tracked. Season expiry \nresets temporary Tap Efficiency and starts a new seasonal leaderboard. Keep season configuration in the database. \nSeason data Required fields \nIdentity seasonId, name, status \nTiming startAt, endAt \nRewards reward configuration by rank/tier \nEconomy tap efficiency rules and seasonal limits \nLeaderboard season-specific accepted tap score \n \n22. Tap League — Reference Analysis \nThe uploaded reference screenshots show a competitive leaderboard with a clear rank column, player identity area, \nlarge central score column, highlighted top ranks, and a persistent 'My Rank' row at the bottom. The important UX \npatterns to reproduce are: \n Top 100 users are visible in the Tap League. \n Ranks 1, 2 and 3 should have visually distinct premium rank treatments. \n Each row should contain rank, avatar/profile image, display name and Tap Score. \n The current user's row remains pinned/sticky at the bottom even when the user is not in the visible top 100. \n If the current user is inside the top 100, still keep the 'My Rank' presentation consistent and avoid duplicate \nconfusing rows. \n Use a season indicator and time remaining so users understand when rankings reset. \n Leaderboard must be server-generated and paginated/limited to the top 100 plus the current user's rank. \n Do not load an unbounded leaderboard into the browser. \n23. Tap League UI Layout \nArea UI requirement \nHeader \nTap League title, current season name, season \ncountdown. \nTop 3 \nSpecial rank cards/rows for #1, #2, #3 with premium but \nrestrained visual treatment. \nRows 4–100 \nCompact leaderboard rows with rank, avatar, username \nand total accepted taps. \nMy Rank \nSticky bottom row with highlighted border/background \nand current user's rank/score. \n\nEmpty/loading Skeleton rows; no layout jump. \nReward preview Show what top ranks receive at season end. \nMobile \nKeep rank and score readable without horizontal \nscrolling. \n \n24. Tap & Earn Main Screen \nThe supplied Tap & Earn concept contains a top information area, energy card, tap multiplier, boost timer, large central \ntap circle, shortcut cards and bottom navigation. Preserve the information hierarchy but redesign it into a polished \nVELoop fintech interface. \nZone Must show \nTop user card Avatar/name, level and progress. \nBalance Current VE balance with compact navigation to wallet. \nEnergy card \nCurrent energy/max energy, recharge rate and next \nrecharge timer. \nMultiplier Current Multitap and Tap Efficiency states. \nBoost Active/inactive 30-second boost and remaining time. \nCentral tap area \nVE coin, tap feedback, combo/streak indicators and \nsubtle background motion. \nFeature shortcuts \nDaily Challenge, Missions, Lucky/Spin, Energy Bank, \nupgrades and League where appropriate. \nBottom nav \nHome, Tap & Earn, Mine, Wallet, Profile consistent with \nthe existing VELoop platform. \n \n25. Visual Design System \nElement Direction \nBase #161827 \nPrimary accent \nWarm VE gold/yellow; use sparingly for value/reward \nstates. \nSecondary accent Electric blue for active/interactive states. \nCards \nDeep navy/blue-black surfaces, subtle border, low-\nopacity glow. \nTypography \nModern sans-serif such as Inter/Manrope; clear \nhierarchy. \nCorners Moderately rounded, not oversized/puffy. \nMotion \nShort, purposeful transitions; avoid constant particle \noverload. \nTrust \nClear labels, predictable controls, readable values and no \nmisleading reward claims. \n \nThe design should be addictive in the sense of being engaging and rewarding, not visually noisy. Avoid excessive neon, \ngiant glows, dozens of floating objects, or casino-like effects. \n26. Frontend Technical Requirements \n React.js with reusable components and clear feature modules. \n Use a proper state/data-fetching approach; do not keep authoritative economic values only in local state. \n Responsive layout for desktop and mobile. \n\n Use CSS modules or the project's existing styling convention consistently. \n Build reusable components for RewardToast, TapButton, EnergyBar, Countdown, BoostCard, UpgradeModal, \nMissionCard, SpinModal, LeagueRow and StickyMyRank. \n Implement loading, empty, error and retry states. \n Use optimistic animation only; never optimistically add authoritative currency to the balance. \n Synchronize server responses after tap batches or state-changing actions. \n Use accessible buttons, labels, focus states and readable contrast. \n Prevent accidental double submissions on purchase/claim/spin actions. \n27. Backend Technical Requirements \n Node.js + Express.js REST API. \n MongoDB with Mongoose. \n Authentication must use the existing VELoop authentication mechanism; do not create a second unrelated auth \nsystem. \n Server-side tap validation and reward selection. \n Server-side energy regeneration from timestamps. \n Server-side upgrade expiry. \n Server-side daily/season reset logic. \n Server-side reward ledger for auditability. \n Atomic balance updates for currencies and reward claims. \n Idempotency for spin, mission claim, daily challenge claim and purchase operations. \n Rate limiting and suspicious-tap detection. \n Centralized configuration for reward probabilities, ranges, cooldowns and season settings. \n Do not trust client-provided reward amounts, energy amounts, tap score or rank. \n28. Suggested MongoDB Models \nCollection Important fields \nUser \nprofile, level, balances, gems, tokens, spins, \ncurrentTapSeasonId \nTapState \nuserId, energy, maxEnergy, rechargeRate, lastEnergyAt, \ntapMultiplier, multiplierExpiresAt, efficiency, \nefficiencyExpiresAt, streak, combo \nTapEvent \nuserId, seasonId, timestamp, serverAcceptedAt, \nrewardType, rewardAmount, energyBefore, energyAfter, \nrequestId \nUpgrade userId, type, level, cost, purchasedAt, expiresAt \nBoost userId, type, startedAt, expiresAt, status \nMission \nmissionId, seasonId, type, target, reward, activeFrom, \nactiveTo \nUserMission userId, missionId, progress, completed, claimedAt \nSpin \nuserId, seasonId, spinId, eligibleAt, resultType, \nresultAmount, createdAt \nTapSeason \nname, startAt, endAt, status, efficiencyRules, \nrewardRules \nTapLeagueScore seasonId, userId, acceptedTapCount, updatedAt \nRewardLedger \nuserId, source, type, amount, currency, referenceId, \ncreatedAt \nAdEvent \nuserId, placement, provider, eventType, createdAt, \noptionalRewardReference \n \n\n29. Suggested API Surface \nMethod Endpoint Purpose \nGET /api/tap/state \nReturn complete current Tap & Earn \nstate. \nPOST /api/tap \nValidate and process one accepted \ntap. \nGET /api/tap/history Return recent reward/tap history. \nPOST /api/tap/boost/activate Activate eligible 30-second boost. \nPOST /api/tap/energy-bank/purchase Purchase 3-day Energy Bank. \nPOST /api/tap/shield/purchase \nPurchase/activate 10-second Energy \nShield. \nPOST /api/tap/upgrade Purchase an eligible upgrade. \nGET /api/tap/missions Return active missions and progress. \nPOST /api/tap/missions/:id/claim Claim completed mission reward. \nGET /api/tap/daily-challenge Return today's challenge. \nPOST /api/tap/daily-challenge/claim Claim completed daily challenge. \nGET /api/tap/lucky Return Lucky Tap eligibility/status. \nPOST /api/tap/lucky/spin \nExecute one server-authoritative \nspin. \nGET /api/tap/league Return top 100 + current user's rank. \nGET /api/tap/season Return active season and countdown. \n \n30. Tap API Validation Logic \nA valid tap should conceptually follow this sequence: \n1. Authenticate the user. \n2. Generate or validate a unique requestId. \n3. Read current TapState using an atomic/transaction-safe approach. \n4. Regenerate energy from elapsed time. \n5. Check whether the request is too close to the user's last accepted tap. \n6. Reject suspicious/impossible request patterns. \n7. Check available energy and active shield. \n8. Apply efficiency/multitap/boost rules according to current server state. \n9. Select reward using server-side probability configuration. \n10. Update currency/energy/tap counters and season score atomically. \n11. Write RewardLedger and TapEvent. \n12. Return the authoritative new state and reward animation payload. \n31. Anti-Auto-Clicker / Abuse Protection \n 200 ms minimum accepted-tap interval. \n Server-side timestamp comparison; client timers are not trusted. \n\n Rate limiting per user/IP/device as appropriate. \n Detect impossible sustained patterns, repeated identical request timing and burst anomalies. \n Use request IDs/idempotency to prevent replaying a tap request. \n Do not accept a client-supplied reward amount. \n Do not accept a client-supplied energy deduction. \n Log suspicious activity for later review. \n Do not block legitimate mobile users simply because their network latency varies; keep detection threshold \npractical and server-configurable. \n32. Ad Integration Boundary \nThe Tap & Earn system should be ad-ready, but ad rendering must not be allowed to manipulate the economy directly \nfrom the client. Ad completion should be verified through the platform's approved ad/verification flow before granting \nany rewarded benefit. \n Keep ad placements modular so interstitial, banner and rewarded-video providers can be changed later. \n Do not hard-code an ad network SDK throughout the TapButton component. \n Rewarded ad benefits should be explicit: e.g. energy recovery, boost activation or another configured benefit. \n Maintain an AdEvent record for eligible rewarded actions. \n Do not grant an economic reward solely because the frontend says an ad finished. \n33. Economy Safety Rules \n Every upgrade is an economic sink; pricing must be configurable. \n Temporary multipliers/efficiency must expire and never become permanent accidentally. \n Season resets must not delete historical ledger data. \n Reward probabilities must be configurable without redeploying React. \n Daily/seasonal caps may be introduced from backend configuration if analytics show excessive issuance. \n All balance-changing operations must be auditable through RewardLedger. \n The system must support changing SVE/VE/Token ranges later without rewriting the tap UI. \n34. User Experience Rules \n A new user should understand Energy, Tap, current reward, Multitap, Boost and Season within the first screen. \n Advanced systems such as Energy Bank, Shield, Efficiency and Fragments should be discoverable but not \noverwhelm the main tap interaction. \n Every purchase modal must show cost, benefit, duration and expiry in plain language. \n Every temporary feature must show an expiry countdown. \n Reward feedback should be immediate and visually lightweight. \n Use consistent terminology: VE, SVE, Tokens, Gems, Spin, Energy, Tap Efficiency, Tap League, Tap Season. \n35. Acceptance Criteria \n User can open Tap & Earn and receive complete current state from backend. \n User can tap the central circle and see animation + haptic feedback where supported. \n Accepted taps cannot occur faster than the configured server interval. \n Energy is consumed correctly and regenerated from timestamps. \n All reward outcomes follow backend-configured probabilities and ranges. \n VE, SVE, Tokens, Gems and Spin balances are persisted in MongoDB. \n\n Multitap, recharge speed, energy capacity and efficiency upgrades work and expire correctly. \n Boost lasts 30 seconds and displays a synchronized countdown. \n Energy Shield lasts 10 seconds and correctly prevents eligible energy consumption. \n Energy Bank lasts exactly 3 days according to server timestamps. \n Lucky Tap cannot be eligible before 300 accepted taps and spin results cannot be duplicated. \n Missions and Daily Tap Challenge track progress server-side and can only be claimed once. \n VE Fragments are stored and displayed as a separate resource. \n Tap Season is persisted with start/end timestamps and controls seasonal expiry. \n Tap League displays top 100 and keeps the current user's rank visible at the bottom. \n Top 3 receive distinct visual treatment. \n Leaderboard ranking is based on accepted server-side taps for the active season. \n All currency-changing actions create auditable ledger entries. \n Refresh/relogin does not reset any progress. \n Frontend cannot directly manipulate authoritative balances. \n Responsive UI works without horizontal overflow on mobile. \n Loading/error/empty states are implemented. \n No feature is left as a fake button or static placeholder. \n36. Deliverables From Intern \n Complete React frontend for Tap & Earn. \n Complete Node/Express API. \n MongoDB/Mongoose schemas and indexes. \n Authentication integration with the existing VELoop user system. \n Tap processing and anti-abuse implementation. \n Upgrade, boost, mission, daily challenge, lucky spin, energy bank, shield and season logic. \n Tap League backend and frontend. \n Reward ledger/history. \n Responsive UI matching VELoop's #161827 fintech design direction. \n Environment variable documentation. \n API documentation or Postman collection. \n README with setup, architecture, database setup and test instructions. \n Seed script for development/demo data. \n Unit/integration tests for the most important balance-changing APIs. \n37. Recommended Component Structure \nSuggested React structure (the intern may improve it if the architecture remains clean): \n TapEarnPage \n TapHeader \n BalanceCard \n EnergyCard \n TapMultiplierCard \n BoostCard \n TapCircle \n TapRewardFloat \n ComboIndicator \n StreakIndicator \n\n TapShortcuts \n UpgradeDrawer \n EnergyBankModal \n EnergyShieldModal \n MissionPanel \n DailyChallengeCard \n LuckyTapModal \n SpinWheel \n FragmentCard \n TapSeasonCard \n TapLeaguePage \n LeaderboardRow \n MyRankStickyRow \n RewardHistoryDrawer \n38. Suggested Backend Structure \n controllers/tapController.js \n controllers/upgradeController.js \n controllers/missionController.js \n controllers/seasonController.js \n controllers/leagueController.js \n services/tapRewardService.js \n services/energyService.js \n services/upgradeService.js \n services/leaderboardService.js \n services/rewardLedgerService.js \n models/TapState.js \n models/TapEvent.js \n models/TapSeason.js \n models/TapLeagueScore.js \n models/RewardLedger.js \n models/UserMission.js \n routes/tapRoutes.js \n config/tapEconomy.js \n39. Testing Requirements \n Test energy regeneration after 20 minutes and after long offline periods. \n Test max energy cap. \n Test 200 ms tap validation. \n Test duplicate requestId. \n Test each reward category and range. \n Test probability configuration using a large simulated sample. \n Test multiplier expiry after 7 days. \n Test Efficiency expiry at season end. \n Test 30-second boost expiry. \n Test 10-second shield expiry. \n Test 3-day Energy Bank expiry. \n\n Test Lucky Tap threshold at 299 and 300 accepted taps. \n Test mission/daily challenge double-claim prevention. \n Test leaderboard ordering and current-user sticky row. \n Test simultaneous requests so balance cannot be double-spent or double-awarded. \n40. Final Instruction to Intern \nDo not treat this as a UI-only assignment. The expected result is a working full-stack Tap & Earn system. The UI should \nlook polished enough for a product demo, while the backend must be strong enough that a user cannot simply edit \nJavaScript, send a fake reward amount, replay requests or refresh the page to generate currency. Build the feature in a \nmodular way because VELoop will tune reward probabilities, costs, seasons and limits after launch. \n \nVELoop Rewards • Tap & Earn • MERN Full-Stack Assignment \n  \nMORE INFORMATION BELOW!!! \n\n41. Exact Economy Configuration — Final Locked Requirements \nThis section resolves the remaining implementation ambiguities. These are the initial VELoop Tap & Earn values. Every \nnumeric value must have one authoritative configuration source and must be referenced everywhere else. \n41.1 Centralized Configuration Rule \n Create one authoritative Tap & Earn economy/configuration service or database-backed configuration document. \n All prices, probabilities, reward ranges, cooldowns, durations, thresholds, limits, season rules and ad rules must be \ndefined there. \n Frontend must receive display configuration from the backend; it must not hard-code economic values. \n Backend services must read the same configuration source rather than repeating numbers in controllers. \n Admin changes must update the centralized value and all consuming APIs/UI must reflect the change without \nsource-code edits. \n Record every admin configuration change with admin, key, old value, new value, timestamp and reason. \n Version configuration so historical TapEvent and RewardLedger records remain interpretable. \n41.2 Tap Reward Roll \nEvery accepted physical tap performs exactly one server-side reward probability roll. \nOutcome Probability Initial reward \nSVE 60% 1 SVE \nVE 20% Random 0.6–1.7 VE, exactly one digit \nafter decimal \nSpin 2% 1 Spin \nGems 5% Configured values 0.5 / 0.8 / 1.0 / 1.2 \n/ up to 2 \nTokens 13% Random 5–100 Tokens \n \nFor ranged decimal rewards, use one decimal place only. Prefer configurable weighted discrete values (for example 0.6, \n0.7 ... 1.7) rather than unrestricted floating-point randomness. \n41.3 Physical Tap / Multitap Rule \nOne physical tap is one interaction. Multitap changes the effective tap count and energy consumption: x2 means one \nphysical tap counts as 2 effective taps and consumes 2 Energy; x3 counts as 3 and consumes 3 Energy. \n Store both physicalTapCount and effectiveTapCount. \n Tap League score uses effective accepted taps. \n Energy consumption equals effective tap count unless the active Energy Shield protects part of the tap. \n One physical tap performs one reward probability roll; configured Multitap/Efficiency/Boost modifiers are then \napplied according to the centralized economy rules. \n TapEvent must record the physical count, effective count, energy consumed and final reward. \n41.4 Energy Capacity Pricing \nCapacity Cost \n500 → 600 100 VEs \n600 → 700 150 VEs \n700 → 800 210 VEs \n800 → 900 Configurable; must be seeded before production \n900 → 1000 Configurable; must be seeded before production \n \n\n41.5 Multitap Pricing \nTier Cost Validity \nx1.0 Default No purchase \nx1.1 1000 SVEs 7 days \nx1.2 1300 SVEs 7 days \nx1.3 Configurable next tier 7 days \n \nKeep the tier list configurable so future tiers can be added without rewriting UI or business logic. \n41.6 Recharge Speed Pricing \nRecharge Interval Cost \n+20 Energy 20 minutes Default \n+22 Energy 20 minutes 2000 Tokens \nNext tiers 20 minutes Configurable \n \n41.7 Energy Bank — Final Rule \nProperty Requirement \nInitial capacity 500 Energy \nPurchase #1 100 VEs \nPurchase #2 500 VEs \nMaximum purchases 2 per active 3-day Bank cycle \nRecharge +20 Energy every 120 minutes \nPriority Bank Energy is consumed before normal Energy \nValidity 3 days \nExpiry Remaining Bank Energy is lost \nStacking No duration stacking; second purchase adds another 500 \nBank Energy capacity, up to 1000 total during the same \nactive cycle \n \nHere, stacking means combining active purchases. V1 allows two purchases but does not extend the 3-day expiry. The \nsecond purchase can increase active Bank capacity from 500 to 1000. \n41.8 Energy Shield — Final Rule \nProperty Requirement \nCost 100 VEs \nDuration 30 seconds \nProtection 90% of eligible taps consume no Energy; 10% consume \nnormal Energy \nMinimum Energy required None \nActive shields 1 maximum \nPurchase while active Blocked \nCooldown after use 5 minutes \nStacking Not allowed \n \nThe server decides the protected/charged tap outcome; the client must never decide which 10% consume Energy. \n41.9 Tap Efficiency — Final Rule \nEfficiency Cost Validity \nx1.0 Default Current season \nx1.1 1.1 SVEs Current Tap Season \nx1.2 1.2 SVEs Current Tap Season \n\nx1.3 Configurable Current Tap Season \n \nTap Efficiency expires at season end. Implement its effect as a configurable multiplier on eligible reward amounts, with \ncurrency-specific rounding. Do not multiply Spins or unrelated outcomes unless explicitly enabled in configuration. \n41.10 Tap Streak vs Tap Combo \nSystem Purpose Reset \nTap Streak Longer-term \nengagement/progression \n5 seconds inactivity \nTap Combo Short rapid-tapping visual effect 2 seconds inactivity \n \nThey must use separate state variables and separate reset timers. \n41.11 Mystery Tap \nAfter every 250 effective taps, the user receives one Mystery Tap eligibility roll. There is a 0.5% chance of triggering the \nMystery Tap at that milestone. A successful Mystery Tap awards an SVE amount configured by the backend. The \nmilestone and attempt are server-tracked. \n41.12 Lucky Tap / Spin Reward Table \nOutcome Probability \n50 Tokens 25% \n500 VEs 0% — disabled, configurable for future \n20 VEs 5% \n2 Spins 10% \n10 Gems 8% \n100 SVEs 12% \n50 SVEs 25% \nBetter Luck 10% \n₹5 Amazon Voucher 0% — disabled, configurable for future \n+15 Energy 5% \n \nThese probabilities total exactly 100%. The server creates and records the spin result before the client reveals the \nanimation result. \n41.13 Tap League Final Rewards \nRank Season reward \n#1 10,000 VEs + 5 Spins \n#2 5,000 VEs + 3 Spins \n#3 1,500 VEs + 1 Spin \n#4–10 500 VEs + 2,500 Tokens \n#11–25 5,000 SVEs + 1,000 Tokens \n#26–50 2,500 SVEs + 10 Gems \n#51–100 1,000 SVEs + 500 Tokens \n \nTie-breaker: higher effective accepted tap score ranks first; if scores are equal, the user who reached that score earlier \nranks first; if still equal, use a deterministic database identifier. \nSeason rollover: freeze scoring → calculate ranks → distribute rewards exactly once → archive the season → activate the \nnext season → reset seasonal efficiency. Historical leaderboard and reward ledger data must remain available. \n\n42. Ad System — Required Demo Implementation \nBuild a modular demo ad system. The admin controls the tap window in which an ad opportunity can appear, with the \ninitial range set to 15–40 accepted/effective taps. \n Central configuration keys: minAdTapThreshold = 15 and maxAdTapThreshold = 40. \n Use randomized opportunity timing inside the configured range and apply sensible frequency caps. \n Create a replaceable DemoAdProvider abstraction. \n Support demo Interstitial, Full-page/Video and Banner placements. \n Demo ads must be clearly marked as demo/non-production. \n Do not put ad-network SDK logic inside TapCircle/TapButton. \n Track opportunity, shown, completed, skipped, failed and rewarded events. \n Rewarded-ad completion must be verified by a trusted callback/server mechanism before granting an economic \nbenefit. \n Changing the centralized ad configuration must update every consuming UI/API. \n43. Admin Control Center — Admin-Proof Architecture \nThe existing VELoop Admin Dashboard must be able to monitor and configure the entire Tap & Earn system. Build a \ndedicated Tap & Earn admin module or expose a clean admin API for the existing dashboard. \nAdmin area Monitor/configure \nEconomy Config Probabilities, reward values/ranges, prices, multipliers, \ndurations, thresholds and limits \nTap Analytics Physical taps, effective taps, accepted/rejected taps, \nactive tappers, taps per hour/day \nRewards SVE/VE/Token/Gem/Spin issuance and distribution \nEnergy Consumption, recharge, capacity upgrades, Bank and \nShield usage \nUpgrades Purchases, active/expired upgrades and sink totals \nAds Opportunities, impressions, completion/failure and \nplacement performance \nAnti-Bot Rejected taps, rate violations, suspicious patterns and \nrisk flags \nTap League Current season, top 100, score distribution and reward \nstatus \nSeasons Start/end, active status, rollover/finalization \nReward Ledger Searchable user/system balance changes \nConfig Audit Admin, changed key, old value, new value, timestamp, \nreason \n \nNo economic value may be duplicated across files. Admin edits must validate, persist, audit and propagate through the \nsame configuration source. \n44. UI/UX — HIGHEST PRIORITY \nThe UI is the highest-priority part of this assignment because the user experiences Tap & Earn almost entirely through \nthe interface. The intern must treat visual quality, interaction feedback, responsiveness and clarity as functional \nrequirements. \n First viewport must clearly communicate VE balance, Energy, recharge countdown, Multitap, Tap Efficiency, Boost \nand the central Tap Circle. \n\n Central Tap Circle is the hero interaction and must feel physically responsive on every accepted tap. \n Every tap: press/compression animation + ripple/glow + reward float + subtle haptic feedback where supported. \n Use the supplied VE tap-circle concept as interaction inspiration while using VELoop's own #161827 fintech design \nlanguage. \n Use VE gold as the primary reward accent and blue as a secondary interaction accent. \n Do not make every card glow. Reserve stronger effects for active rewards, boosts, Lucky/Mystery events and the \nTap Circle. \n Use bottom sheets, drawers and focused modals for advanced systems so the first screen stays understandable. \n Every purchase must show cost, benefit, duration and expiry before confirmation. \n Every temporary feature must have a live countdown. \n Use consistent visual identity for SVE, VE, Tokens, Gems, Spins and Energy. \n Show a compact last-reward/history feedback area without forcing the user away from the tap screen. \n Loading, error, rejected tap, reconnecting and empty states must be designed—not plain text placeholders. \n Never freeze the Tap Circle while waiting for a network response; animate immediately and reconcile with \nauthoritative server state. \n Rejected taps should show subtle reasons such as Too Fast, Not Enough Energy or Cooldown Active. \n Touch targets must be mobile-friendly and the Tap Circle must not conflict with bottom navigation. \n Respect reduced-motion preferences where practical. \n Avoid casino-like effects, excessive particles, flashing, giant gradients or visual clutter. Target: engaging fintech, not \ncheap game UI. \n44.1 First-View Information Hierarchy \nPriority Information \n1 Tap Circle + current reward feedback \n2 Energy current/max + recharge countdown \n3 VE balance + level \n4 Multitap + Tap Efficiency \n5 Boost + countdown \n6 Daily Challenge + Missions \n7 Lucky/Spin + Energy Bank + Shield \n8 VE Fragments + Tap Season \n9 Tap League \n \n44.2 Tap Feedback Sequence \n1. User touches Tap Circle. \n2. Frontend immediately plays press animation and vibration where supported. \n3. Frontend begins the 200 ms interaction lock. \n4. Unique requestId is sent to backend. \n5. Backend validates authentication, timing, energy, Shield, anti-bot and season state. \n6. Backend performs one reward roll and applies configured Multitap/Efficiency/Boost rules. \n7. Backend atomically updates state and writes TapEvent + RewardLedger. \n8. Frontend receives authoritative response. \n9. Reward float displays exactly what was awarded. \n10. Balance, Energy, Combo, Streak and League progress animate to the returned state. \n\n45. Single-Source Configuration Architecture \nAll values below are examples of configuration keys, not duplicated constants. The intern must implement a single \nsource of truth. \n tapEconomy.reward.sve \n tapEconomy.reward.ve \n tapEconomy.reward.tokens \n tapEconomy.reward.gems \n tapEconomy.reward.spin \n tapEconomy.energy.baseCapacity \n tapEconomy.energy.recharge \n tapEconomy.energy.capacityTiers \n tapEconomy.multitap.tiers \n tapEconomy.rechargeSpeed.tiers \n tapEconomy.energyBank \n tapEconomy.energyShield \n tapEconomy.tapEfficiency.tiers \n tapEconomy.tapStreak \n tapEconomy.tapCombo \n tapEconomy.mysteryTap \n tapEconomy.luckyTap.spinRewards \n tapEconomy.ads \n tapEconomy.seasons \n tapEconomy.league.rewards \n tapEconomy.security \n46. Reliability, Precision and Concurrency \n Use integer smallest currency units or MongoDB Decimal128 for fractional balances; never rely on binary floating-\npoint arithmetic for authoritative balances. \n Use unique indexes for userId/requestId where replay protection requires them. \n Index TapEvent by userId + timestamp and seasonId + timestamp/score as appropriate. \n Tap processing must be atomic so simultaneous requests cannot double-spend Energy or double-award rewards. \n Configuration changes must not alter historical ledger events. \n Store timestamps in UTC; convert to local time only in the UI. \n Server time is authoritative for all cooldowns, recharge, expiry and seasons. \n State-changing endpoints should return authoritative resulting state or a version number for safe frontend \nreconciliation. \n47. Final UI Acceptance Checklist \n Premium, attractive first load; no generic template appearance. \n Tap Circle is dominant but does not hide important information. \n Tap feedback is visible immediately. \n Reward types are understandable at a glance. \n Energy and recharge state are instantly understandable. \n Multitap, Efficiency and Boost are visually distinct. \n Temporary features communicate expiry. \n Ads do not cause layout jumps or destroy the core interaction. \n\n Tap League feels competitive and polished with Top 3 and sticky My Rank. \n Mobile has no horizontal scrolling and controls are thumb-friendly. \n Desktop uses space naturally without oversized stretched cards. \n Loading, network failure, rejected tap and success states are designed. \n Animations are smooth, short and purposeful. \n The interface remains readable when multiple effects are active. \n Every visible economy value comes from backend state/configuration. \n48. Final Definition of Done \nThe feature is complete only when an authenticated user can tap, consume Energy, receive server-selected rewards, \npurchase and expire upgrades, use Boost/Bank/Shield/Efficiency, complete Missions and Daily Challenges, trigger \nMystery/Lucky mechanics, accumulate seasonal Tap League score, see Top 100 + My Rank, encounter the configurable \ndemo ad system, and have every economic event visible/auditable from the Admin Dashboard. The UI must be polished, \nresponsive, engaging and production-facing—not an intern prototype. \n \n \nProject Timeline s Submission Deadline \nTo ensure smooth project execution and timely review: \nProject Assigned On: 20 August 2026 \nProject Start Date: 20 August 2026 \nSubmission Deadline: 10 September 2026 \nSubmission Tine: 5:30 P.M. (IST) \n ",
+      "createdAt": "2026-09-02T14:54:47.660Z"
+    },
+    {
+      "_id": "53be461249d39dcd1eacb829",
+      "title": "Tap_Earn_Page_task_Full_Stack",
+      "fileName": "Tap_Earn_Page_task_Full_Stack.pdf",
+      "fileUrl": "/uploads/1788361300663-178704754.pdf",
+      "fileSize": 565627,
+      "userId": "8302a651ab18c3ebf921a99f",
+      "status": "Ready",
+      "subject": "General",
+      "extractedText": "\n\nVELoop Rewards \nTap & Earn — Complete MERN Full-Stack \nIntern Task \nProduction-oriented implementation specification \n \nProject VELoop Rewards — Tap & Earn \nStack MERN: MongoDB + Express.js + React.js + Node.js \nPlatform body color #161827 \nPrimary visual direction Minimal • Premium • Fintech • Interactive • Trusted \nReference \nUploaded Tap & Earn concept + uploaded Tap League \nscreenshots \nPrimary objective \nBuild the complete frontend + backend, not a static UI \ndemo \n \n1. Task Objective \nBuild the complete VELoop Rewards Tap & Earn module as a production-style MERN feature. The experience must feel \nengaging like a modern tap-to-earn game, but the visual language must remain premium, minimal, trustworthy and \nfintech-oriented. The implementation must include real backend state, server-authoritative reward calculation, secure \ntap processing, upgrade systems, seasonal progression, Tap League ranking, reward history and all required UI \ninteractions. \n2. Non-Negotiable Requirements \n Use MERN stack throughout the feature. \n Frontend must be React.js and responsive for desktop and mobile. \n Backend must be Node.js + Express.js with MongoDB persistence. \n Do not hard-code balances, energy, rank, reward history, upgrades or season data in React. \n Backend is the source of truth for rewards, balances, energy, cooldowns, upgrades and leaderboard scores. \n Every accepted tap must respect a 200 ms minimum processing interval. Frontend must visibly animate every tap \nand provide vibration feedback where supported. \n The 200 ms delay must NOT be the only anti-bot mechanism. Backend must reject impossible tap rates and \nsuspicious sequences. \n The UI must never feel cluttered. Advanced features should be understandable at first glance and expandable \nthrough drawers/modals. \n Use the supplied Tap & Earn visual concept as the structural inspiration, but do not copy another game's branding \nor assets. \n Use the platform body color #161827 as the foundation of the design system. \n3. Core Tap Interaction \nThe central interaction is the VE coin/tap circle. Every tap must feel responsive even though reward processing is \ncontrolled by the backend. \n\nRequirement Implementation \nTap animation \nScale/press effect, glow/ripple, small coin/token burst \nand subtle counter animation. \nHaptic feedback \nUse navigator.vibrate where supported; fail silently on \nunsupported devices. \n200 ms interval \nDo not accept another tap event locally until the 200 ms \ninteraction window is respected. \nServer authority \nClient sends tap request; server validates state and \ndecides reward. \nReward feedback \nShow a compact floating reward such as +1 SVE, +1.2 VE, \n+25 Tokens or +1 Spin. \nNo guaranteed reward per tap \nThe tap animation happens on every accepted tap, but \nreward outcomes follow configured reward probabilities. \nLow-latency feel \nAnimate immediately; reconcile balance/energy with the \nserver response. \nFailed tap \nShow subtle feedback such as 'Too fast' or 'Energy \nempty' without a disruptive modal. \n \n4. Tap Reward Distribution \nUse the following initial reward distribution. These values must be configurable from the backend so the economy can \nbe tuned later without changing frontend code. \nOutcome Initial probability Reward range / rule \nSVE 60% \n1 SVE per rewarded SVE outcome \n(initial configuration) \nVE 20% 0.6 to 1.7 VE \nSpin 2% \n1 spin whenever a spin outcome is \nselected \nGems 5% 0.5, 0.8, 1, 1.2, up to 2 gems \nTokens 13% remainder 5 to 100 tokens \n \nImportant: the listed percentages total 87% before the token remainder. Therefore the backend should define Tokens \nas the remaining 13% so the distribution totals exactly 100%. Do not create an unaccounted reward bucket. \nReward probabilities must be server-side configuration. The client must never decide whether a tap gives SVE, VE, Spin, \nGems or Tokens. \n5. Energy System \nFeature Requirement \nBase energy 500 / 500 \nConsumption \n1 energy per accepted tap before any efficiency rules are \napplied. \nRecharge +20 energy every 20 minutes by default. \nStorage upgrade User can increase maximum capacity by spending VEs. \nRecharge-speed upgrade \nUser can increase recharge speed using the designated \nupgrade currency/tokens. \nZero energy \nDisable accepted taps until energy becomes available or \nthe user uses an eligible recovery option. \nServer calculation \nEnergy regeneration must be calculated from \ntimestamps rather than requiring a request every 20 \nminutes. \n\nCap \nRegenerated energy can never exceed maximum storage \ncapacity. \n \n6. Energy Storage Capacity \nDefault capacity is 500. Users can purchase higher capacity. The exact pricing curve should be configurable. Upgrade \nprices must increase faster than capacity so users cannot create uncontrolled reward inflation. \nSuggested initial progression: 500 → 600 → 700 → 800 → 900 → 1000. Keep the values configurable. \n7. Multitap \nMultitap increases the reward value of an accepted physical tap. Default is x1. Users may upgrade up to x3. The upgrade \nis temporary and remains valid for 7 days from activation/purchase. \nLevel Tap effect Validity \nx1 1x Default \nx2 2x 7 days \nx3 3x 7 days \n \nThe backend must store activation time and expiry time. After expiry, the user automatically falls back to the highest \nnon-expired multiplier. \n8. Recharge Speed \nUsers can upgrade energy recharge speed. Keep the upgrade curve configurable. Do not allow recharge speed to \nbecome unlimited. Suggested initial display: +20/20m → +22/20m → +24/20m → +27/20m → +30/20m. \n9. Tap Streak \nShow the user's current consecutive tap streak. The streak is primarily an engagement mechanic. Use a visible counter \nand a lightweight progress effect. Do not make streak rewards large enough to damage the economy. \n10. Precision Tap \nOccasionally display a small precision target during the tap interaction. A user who taps the target accurately receives \nTokens. The reward amount should be configured by the backend. Precision taps must not bypass normal energy or \nserver validation. \n11. Mystery Tap \nA mystery tap is a special tap outcome that awards SVEs. It should be visually distinct but not excessively flashy. The \nbackend decides when the event is available and the reward amount. \n\n12. Tap Combo \nTap Combo is an animation/engagement layer. It should visually show the user that they are tapping continuously, for \nexample COMBO x12, COMBO x25, COMBO x50. The combo animation itself does not need to create a separate \neconomic reward unless explicitly enabled later. \n13. Boost Windows \nProvide a temporary 30-second boost window. The boost may increase the tap reward according to backend \nconfiguration. It should have a clear countdown, active state and expiry animation. Boost activation must be logged. \n14. Lucky Tap + Spin \nLucky Tap cannot trigger before the user reaches a minimum of 300 accepted taps in the relevant tracking window. \nAfter 300 taps, the backend may randomly trigger a Lucky Tap. The reward interaction is a Spin. \n Show a clear progress indicator toward the 300-tap threshold. \n Before 300 taps, do not display a misleading 'almost lucky' state that implies a guaranteed reward. \n After eligibility, the backend controls the trigger. \n Spin result must be server-generated and recorded in reward history. \n Prevent double-spinning through idempotent server-side processing. \n15. Tap Missions \nCreate daily/seasonal missions that award Tokens. Examples: \n Complete 100 accepted taps. \n Complete 500 accepted taps. \n Reach a target combo. \n Complete a precision tap. \n Use a boost window. \n Return and tap on multiple sessions. \n16. Daily Tap Challenge \nCreate a daily challenge with convenient, controlled rewards. The user should see progress immediately. The challenge \nresets according to the platform's daily reset time. Backend must enforce completion and prevent duplicate claims. \n17. Energy Bank \nUsers can purchase an Energy Bank valid for 3 days. The Energy Bank is a separate temporary energy reserve. The exact \ncapacity and price should be configurable. The UI must clearly show its expiry countdown and remaining capacity. \n18. Energy Shield \nUsers can purchase/activate an Energy Shield using SVEs. Shield duration is 10 seconds. During the active window, \neligible taps do not consume energy. The shield must have a visible countdown and server-side start/expiry \ntimestamps. \n\n19. Tap Efficiency \nTap Efficiency is a temporary seasonal/monthly upgrade. Initial levels: 1.1x, 1.2x and 1.3x. The user's purchased \nefficiency expires when the current Tap Season expires. Do not make it permanent. \nThe frontend must show the current efficiency, current level, upgrade cost and exact expiry date/time. \n20. VE Fragments \nIntroduce VE Fragments as a separate collectible/progression resource. The conversion/value will remain configurable \nand can be decided later. Build the data model and UI so the value can change without a database migration. \n21. Tap Seasons \nA Tap Season is a fixed period during which Tap League ranking and seasonal progression are tracked. Season expiry \nresets temporary Tap Efficiency and starts a new seasonal leaderboard. Keep season configuration in the database. \nSeason data Required fields \nIdentity seasonId, name, status \nTiming startAt, endAt \nRewards reward configuration by rank/tier \nEconomy tap efficiency rules and seasonal limits \nLeaderboard season-specific accepted tap score \n \n22. Tap League — Reference Analysis \nThe uploaded reference screenshots show a competitive leaderboard with a clear rank column, player identity area, \nlarge central score column, highlighted top ranks, and a persistent 'My Rank' row at the bottom. The important UX \npatterns to reproduce are: \n Top 100 users are visible in the Tap League. \n Ranks 1, 2 and 3 should have visually distinct premium rank treatments. \n Each row should contain rank, avatar/profile image, display name and Tap Score. \n The current user's row remains pinned/sticky at the bottom even when the user is not in the visible top 100. \n If the current user is inside the top 100, still keep the 'My Rank' presentation consistent and avoid duplicate \nconfusing rows. \n Use a season indicator and time remaining so users understand when rankings reset. \n Leaderboard must be server-generated and paginated/limited to the top 100 plus the current user's rank. \n Do not load an unbounded leaderboard into the browser. \n23. Tap League UI Layout \nArea UI requirement \nHeader \nTap League title, current season name, season \ncountdown. \nTop 3 \nSpecial rank cards/rows for #1, #2, #3 with premium but \nrestrained visual treatment. \nRows 4–100 \nCompact leaderboard rows with rank, avatar, username \nand total accepted taps. \nMy Rank \nSticky bottom row with highlighted border/background \nand current user's rank/score. \n\nEmpty/loading Skeleton rows; no layout jump. \nReward preview Show what top ranks receive at season end. \nMobile \nKeep rank and score readable without horizontal \nscrolling. \n \n24. Tap & Earn Main Screen \nThe supplied Tap & Earn concept contains a top information area, energy card, tap multiplier, boost timer, large central \ntap circle, shortcut cards and bottom navigation. Preserve the information hierarchy but redesign it into a polished \nVELoop fintech interface. \nZone Must show \nTop user card Avatar/name, level and progress. \nBalance Current VE balance with compact navigation to wallet. \nEnergy card \nCurrent energy/max energy, recharge rate and next \nrecharge timer. \nMultiplier Current Multitap and Tap Efficiency states. \nBoost Active/inactive 30-second boost and remaining time. \nCentral tap area \nVE coin, tap feedback, combo/streak indicators and \nsubtle background motion. \nFeature shortcuts \nDaily Challenge, Missions, Lucky/Spin, Energy Bank, \nupgrades and League where appropriate. \nBottom nav \nHome, Tap & Earn, Mine, Wallet, Profile consistent with \nthe existing VELoop platform. \n \n25. Visual Design System \nElement Direction \nBase #161827 \nPrimary accent \nWarm VE gold/yellow; use sparingly for value/reward \nstates. \nSecondary accent Electric blue for active/interactive states. \nCards \nDeep navy/blue-black surfaces, subtle border, low-\nopacity glow. \nTypography \nModern sans-serif such as Inter/Manrope; clear \nhierarchy. \nCorners Moderately rounded, not oversized/puffy. \nMotion \nShort, purposeful transitions; avoid constant particle \noverload. \nTrust \nClear labels, predictable controls, readable values and no \nmisleading reward claims. \n \nThe design should be addictive in the sense of being engaging and rewarding, not visually noisy. Avoid excessive neon, \ngiant glows, dozens of floating objects, or casino-like effects. \n26. Frontend Technical Requirements \n React.js with reusable components and clear feature modules. \n Use a proper state/data-fetching approach; do not keep authoritative economic values only in local state. \n Responsive layout for desktop and mobile. \n\n Use CSS modules or the project's existing styling convention consistently. \n Build reusable components for RewardToast, TapButton, EnergyBar, Countdown, BoostCard, UpgradeModal, \nMissionCard, SpinModal, LeagueRow and StickyMyRank. \n Implement loading, empty, error and retry states. \n Use optimistic animation only; never optimistically add authoritative currency to the balance. \n Synchronize server responses after tap batches or state-changing actions. \n Use accessible buttons, labels, focus states and readable contrast. \n Prevent accidental double submissions on purchase/claim/spin actions. \n27. Backend Technical Requirements \n Node.js + Express.js REST API. \n MongoDB with Mongoose. \n Authentication must use the existing VELoop authentication mechanism; do not create a second unrelated auth \nsystem. \n Server-side tap validation and reward selection. \n Server-side energy regeneration from timestamps. \n Server-side upgrade expiry. \n Server-side daily/season reset logic. \n Server-side reward ledger for auditability. \n Atomic balance updates for currencies and reward claims. \n Idempotency for spin, mission claim, daily challenge claim and purchase operations. \n Rate limiting and suspicious-tap detection. \n Centralized configuration for reward probabilities, ranges, cooldowns and season settings. \n Do not trust client-provided reward amounts, energy amounts, tap score or rank. \n28. Suggested MongoDB Models \nCollection Important fields \nUser \nprofile, level, balances, gems, tokens, spins, \ncurrentTapSeasonId \nTapState \nuserId, energy, maxEnergy, rechargeRate, lastEnergyAt, \ntapMultiplier, multiplierExpiresAt, efficiency, \nefficiencyExpiresAt, streak, combo \nTapEvent \nuserId, seasonId, timestamp, serverAcceptedAt, \nrewardType, rewardAmount, energyBefore, energyAfter, \nrequestId \nUpgrade userId, type, level, cost, purchasedAt, expiresAt \nBoost userId, type, startedAt, expiresAt, status \nMission \nmissionId, seasonId, type, target, reward, activeFrom, \nactiveTo \nUserMission userId, missionId, progress, completed, claimedAt \nSpin \nuserId, seasonId, spinId, eligibleAt, resultType, \nresultAmount, createdAt \nTapSeason \nname, startAt, endAt, status, efficiencyRules, \nrewardRules \nTapLeagueScore seasonId, userId, acceptedTapCount, updatedAt \nRewardLedger \nuserId, source, type, amount, currency, referenceId, \ncreatedAt \nAdEvent \nuserId, placement, provider, eventType, createdAt, \noptionalRewardReference \n \n\n29. Suggested API Surface \nMethod Endpoint Purpose \nGET /api/tap/state \nReturn complete current Tap & Earn \nstate. \nPOST /api/tap \nValidate and process one accepted \ntap. \nGET /api/tap/history Return recent reward/tap history. \nPOST /api/tap/boost/activate Activate eligible 30-second boost. \nPOST /api/tap/energy-bank/purchase Purchase 3-day Energy Bank. \nPOST /api/tap/shield/purchase \nPurchase/activate 10-second Energy \nShield. \nPOST /api/tap/upgrade Purchase an eligible upgrade. \nGET /api/tap/missions Return active missions and progress. \nPOST /api/tap/missions/:id/claim Claim completed mission reward. \nGET /api/tap/daily-challenge Return today's challenge. \nPOST /api/tap/daily-challenge/claim Claim completed daily challenge. \nGET /api/tap/lucky Return Lucky Tap eligibility/status. \nPOST /api/tap/lucky/spin \nExecute one server-authoritative \nspin. \nGET /api/tap/league Return top 100 + current user's rank. \nGET /api/tap/season Return active season and countdown. \n \n30. Tap API Validation Logic \nA valid tap should conceptually follow this sequence: \n1. Authenticate the user. \n2. Generate or validate a unique requestId. \n3. Read current TapState using an atomic/transaction-safe approach. \n4. Regenerate energy from elapsed time. \n5. Check whether the request is too close to the user's last accepted tap. \n6. Reject suspicious/impossible request patterns. \n7. Check available energy and active shield. \n8. Apply efficiency/multitap/boost rules according to current server state. \n9. Select reward using server-side probability configuration. \n10. Update currency/energy/tap counters and season score atomically. \n11. Write RewardLedger and TapEvent. \n12. Return the authoritative new state and reward animation payload. \n31. Anti-Auto-Clicker / Abuse Protection \n 200 ms minimum accepted-tap interval. \n Server-side timestamp comparison; client timers are not trusted. \n\n Rate limiting per user/IP/device as appropriate. \n Detect impossible sustained patterns, repeated identical request timing and burst anomalies. \n Use request IDs/idempotency to prevent replaying a tap request. \n Do not accept a client-supplied reward amount. \n Do not accept a client-supplied energy deduction. \n Log suspicious activity for later review. \n Do not block legitimate mobile users simply because their network latency varies; keep detection threshold \npractical and server-configurable. \n32. Ad Integration Boundary \nThe Tap & Earn system should be ad-ready, but ad rendering must not be allowed to manipulate the economy directly \nfrom the client. Ad completion should be verified through the platform's approved ad/verification flow before granting \nany rewarded benefit. \n Keep ad placements modular so interstitial, banner and rewarded-video providers can be changed later. \n Do not hard-code an ad network SDK throughout the TapButton component. \n Rewarded ad benefits should be explicit: e.g. energy recovery, boost activation or another configured benefit. \n Maintain an AdEvent record for eligible rewarded actions. \n Do not grant an economic reward solely because the frontend says an ad finished. \n33. Economy Safety Rules \n Every upgrade is an economic sink; pricing must be configurable. \n Temporary multipliers/efficiency must expire and never become permanent accidentally. \n Season resets must not delete historical ledger data. \n Reward probabilities must be configurable without redeploying React. \n Daily/seasonal caps may be introduced from backend configuration if analytics show excessive issuance. \n All balance-changing operations must be auditable through RewardLedger. \n The system must support changing SVE/VE/Token ranges later without rewriting the tap UI. \n34. User Experience Rules \n A new user should understand Energy, Tap, current reward, Multitap, Boost and Season within the first screen. \n Advanced systems such as Energy Bank, Shield, Efficiency and Fragments should be discoverable but not \noverwhelm the main tap interaction. \n Every purchase modal must show cost, benefit, duration and expiry in plain language. \n Every temporary feature must show an expiry countdown. \n Reward feedback should be immediate and visually lightweight. \n Use consistent terminology: VE, SVE, Tokens, Gems, Spin, Energy, Tap Efficiency, Tap League, Tap Season. \n35. Acceptance Criteria \n User can open Tap & Earn and receive complete current state from backend. \n User can tap the central circle and see animation + haptic feedback where supported. \n Accepted taps cannot occur faster than the configured server interval. \n Energy is consumed correctly and regenerated from timestamps. \n All reward outcomes follow backend-configured probabilities and ranges. \n VE, SVE, Tokens, Gems and Spin balances are persisted in MongoDB. \n\n Multitap, recharge speed, energy capacity and efficiency upgrades work and expire correctly. \n Boost lasts 30 seconds and displays a synchronized countdown. \n Energy Shield lasts 10 seconds and correctly prevents eligible energy consumption. \n Energy Bank lasts exactly 3 days according to server timestamps. \n Lucky Tap cannot be eligible before 300 accepted taps and spin results cannot be duplicated. \n Missions and Daily Tap Challenge track progress server-side and can only be claimed once. \n VE Fragments are stored and displayed as a separate resource. \n Tap Season is persisted with start/end timestamps and controls seasonal expiry. \n Tap League displays top 100 and keeps the current user's rank visible at the bottom. \n Top 3 receive distinct visual treatment. \n Leaderboard ranking is based on accepted server-side taps for the active season. \n All currency-changing actions create auditable ledger entries. \n Refresh/relogin does not reset any progress. \n Frontend cannot directly manipulate authoritative balances. \n Responsive UI works without horizontal overflow on mobile. \n Loading/error/empty states are implemented. \n No feature is left as a fake button or static placeholder. \n36. Deliverables From Intern \n Complete React frontend for Tap & Earn. \n Complete Node/Express API. \n MongoDB/Mongoose schemas and indexes. \n Authentication integration with the existing VELoop user system. \n Tap processing and anti-abuse implementation. \n Upgrade, boost, mission, daily challenge, lucky spin, energy bank, shield and season logic. \n Tap League backend and frontend. \n Reward ledger/history. \n Responsive UI matching VELoop's #161827 fintech design direction. \n Environment variable documentation. \n API documentation or Postman collection. \n README with setup, architecture, database setup and test instructions. \n Seed script for development/demo data. \n Unit/integration tests for the most important balance-changing APIs. \n37. Recommended Component Structure \nSuggested React structure (the intern may improve it if the architecture remains clean): \n TapEarnPage \n TapHeader \n BalanceCard \n EnergyCard \n TapMultiplierCard \n BoostCard \n TapCircle \n TapRewardFloat \n ComboIndicator \n StreakIndicator \n\n TapShortcuts \n UpgradeDrawer \n EnergyBankModal \n EnergyShieldModal \n MissionPanel \n DailyChallengeCard \n LuckyTapModal \n SpinWheel \n FragmentCard \n TapSeasonCard \n TapLeaguePage \n LeaderboardRow \n MyRankStickyRow \n RewardHistoryDrawer \n38. Suggested Backend Structure \n controllers/tapController.js \n controllers/upgradeController.js \n controllers/missionController.js \n controllers/seasonController.js \n controllers/leagueController.js \n services/tapRewardService.js \n services/energyService.js \n services/upgradeService.js \n services/leaderboardService.js \n services/rewardLedgerService.js \n models/TapState.js \n models/TapEvent.js \n models/TapSeason.js \n models/TapLeagueScore.js \n models/RewardLedger.js \n models/UserMission.js \n routes/tapRoutes.js \n config/tapEconomy.js \n39. Testing Requirements \n Test energy regeneration after 20 minutes and after long offline periods. \n Test max energy cap. \n Test 200 ms tap validation. \n Test duplicate requestId. \n Test each reward category and range. \n Test probability configuration using a large simulated sample. \n Test multiplier expiry after 7 days. \n Test Efficiency expiry at season end. \n Test 30-second boost expiry. \n Test 10-second shield expiry. \n Test 3-day Energy Bank expiry. \n\n Test Lucky Tap threshold at 299 and 300 accepted taps. \n Test mission/daily challenge double-claim prevention. \n Test leaderboard ordering and current-user sticky row. \n Test simultaneous requests so balance cannot be double-spent or double-awarded. \n40. Final Instruction to Intern \nDo not treat this as a UI-only assignment. The expected result is a working full-stack Tap & Earn system. The UI should \nlook polished enough for a product demo, while the backend must be strong enough that a user cannot simply edit \nJavaScript, send a fake reward amount, replay requests or refresh the page to generate currency. Build the feature in a \nmodular way because VELoop will tune reward probabilities, costs, seasons and limits after launch. \n \nVELoop Rewards • Tap & Earn • MERN Full-Stack Assignment \n  \nMORE INFORMATION BELOW!!! \n\n41. Exact Economy Configuration — Final Locked Requirements \nThis section resolves the remaining implementation ambiguities. These are the initial VELoop Tap & Earn values. Every \nnumeric value must have one authoritative configuration source and must be referenced everywhere else. \n41.1 Centralized Configuration Rule \n Create one authoritative Tap & Earn economy/configuration service or database-backed configuration document. \n All prices, probabilities, reward ranges, cooldowns, durations, thresholds, limits, season rules and ad rules must be \ndefined there. \n Frontend must receive display configuration from the backend; it must not hard-code economic values. \n Backend services must read the same configuration source rather than repeating numbers in controllers. \n Admin changes must update the centralized value and all consuming APIs/UI must reflect the change without \nsource-code edits. \n Record every admin configuration change with admin, key, old value, new value, timestamp and reason. \n Version configuration so historical TapEvent and RewardLedger records remain interpretable. \n41.2 Tap Reward Roll \nEvery accepted physical tap performs exactly one server-side reward probability roll. \nOutcome Probability Initial reward \nSVE 60% 1 SVE \nVE 20% Random 0.6–1.7 VE, exactly one digit \nafter decimal \nSpin 2% 1 Spin \nGems 5% Configured values 0.5 / 0.8 / 1.0 / 1.2 \n/ up to 2 \nTokens 13% Random 5–100 Tokens \n \nFor ranged decimal rewards, use one decimal place only. Prefer configurable weighted discrete values (for example 0.6, \n0.7 ... 1.7) rather than unrestricted floating-point randomness. \n41.3 Physical Tap / Multitap Rule \nOne physical tap is one interaction. Multitap changes the effective tap count and energy consumption: x2 means one \nphysical tap counts as 2 effective taps and consumes 2 Energy; x3 counts as 3 and consumes 3 Energy. \n Store both physicalTapCount and effectiveTapCount. \n Tap League score uses effective accepted taps. \n Energy consumption equals effective tap count unless the active Energy Shield protects part of the tap. \n One physical tap performs one reward probability roll; configured Multitap/Efficiency/Boost modifiers are then \napplied according to the centralized economy rules. \n TapEvent must record the physical count, effective count, energy consumed and final reward. \n41.4 Energy Capacity Pricing \nCapacity Cost \n500 → 600 100 VEs \n600 → 700 150 VEs \n700 → 800 210 VEs \n800 → 900 Configurable; must be seeded before production \n900 → 1000 Configurable; must be seeded before production \n \n\n41.5 Multitap Pricing \nTier Cost Validity \nx1.0 Default No purchase \nx1.1 1000 SVEs 7 days \nx1.2 1300 SVEs 7 days \nx1.3 Configurable next tier 7 days \n \nKeep the tier list configurable so future tiers can be added without rewriting UI or business logic. \n41.6 Recharge Speed Pricing \nRecharge Interval Cost \n+20 Energy 20 minutes Default \n+22 Energy 20 minutes 2000 Tokens \nNext tiers 20 minutes Configurable \n \n41.7 Energy Bank — Final Rule \nProperty Requirement \nInitial capacity 500 Energy \nPurchase #1 100 VEs \nPurchase #2 500 VEs \nMaximum purchases 2 per active 3-day Bank cycle \nRecharge +20 Energy every 120 minutes \nPriority Bank Energy is consumed before normal Energy \nValidity 3 days \nExpiry Remaining Bank Energy is lost \nStacking No duration stacking; second purchase adds another 500 \nBank Energy capacity, up to 1000 total during the same \nactive cycle \n \nHere, stacking means combining active purchases. V1 allows two purchases but does not extend the 3-day expiry. The \nsecond purchase can increase active Bank capacity from 500 to 1000. \n41.8 Energy Shield — Final Rule \nProperty Requirement \nCost 100 VEs \nDuration 30 seconds \nProtection 90% of eligible taps consume no Energy; 10% consume \nnormal Energy \nMinimum Energy required None \nActive shields 1 maximum \nPurchase while active Blocked \nCooldown after use 5 minutes \nStacking Not allowed \n \nThe server decides the protected/charged tap outcome; the client must never decide which 10% consume Energy. \n41.9 Tap Efficiency — Final Rule \nEfficiency Cost Validity \nx1.0 Default Current season \nx1.1 1.1 SVEs Current Tap Season \nx1.2 1.2 SVEs Current Tap Season \n\nx1.3 Configurable Current Tap Season \n \nTap Efficiency expires at season end. Implement its effect as a configurable multiplier on eligible reward amounts, with \ncurrency-specific rounding. Do not multiply Spins or unrelated outcomes unless explicitly enabled in configuration. \n41.10 Tap Streak vs Tap Combo \nSystem Purpose Reset \nTap Streak Longer-term \nengagement/progression \n5 seconds inactivity \nTap Combo Short rapid-tapping visual effect 2 seconds inactivity \n \nThey must use separate state variables and separate reset timers. \n41.11 Mystery Tap \nAfter every 250 effective taps, the user receives one Mystery Tap eligibility roll. There is a 0.5% chance of triggering the \nMystery Tap at that milestone. A successful Mystery Tap awards an SVE amount configured by the backend. The \nmilestone and attempt are server-tracked. \n41.12 Lucky Tap / Spin Reward Table \nOutcome Probability \n50 Tokens 25% \n500 VEs 0% — disabled, configurable for future \n20 VEs 5% \n2 Spins 10% \n10 Gems 8% \n100 SVEs 12% \n50 SVEs 25% \nBetter Luck 10% \n₹5 Amazon Voucher 0% — disabled, configurable for future \n+15 Energy 5% \n \nThese probabilities total exactly 100%. The server creates and records the spin result before the client reveals the \nanimation result. \n41.13 Tap League Final Rewards \nRank Season reward \n#1 10,000 VEs + 5 Spins \n#2 5,000 VEs + 3 Spins \n#3 1,500 VEs + 1 Spin \n#4–10 500 VEs + 2,500 Tokens \n#11–25 5,000 SVEs + 1,000 Tokens \n#26–50 2,500 SVEs + 10 Gems \n#51–100 1,000 SVEs + 500 Tokens \n \nTie-breaker: higher effective accepted tap score ranks first; if scores are equal, the user who reached that score earlier \nranks first; if still equal, use a deterministic database identifier. \nSeason rollover: freeze scoring → calculate ranks → distribute rewards exactly once → archive the season → activate the \nnext season → reset seasonal efficiency. Historical leaderboard and reward ledger data must remain available. \n\n42. Ad System — Required Demo Implementation \nBuild a modular demo ad system. The admin controls the tap window in which an ad opportunity can appear, with the \ninitial range set to 15–40 accepted/effective taps. \n Central configuration keys: minAdTapThreshold = 15 and maxAdTapThreshold = 40. \n Use randomized opportunity timing inside the configured range and apply sensible frequency caps. \n Create a replaceable DemoAdProvider abstraction. \n Support demo Interstitial, Full-page/Video and Banner placements. \n Demo ads must be clearly marked as demo/non-production. \n Do not put ad-network SDK logic inside TapCircle/TapButton. \n Track opportunity, shown, completed, skipped, failed and rewarded events. \n Rewarded-ad completion must be verified by a trusted callback/server mechanism before granting an economic \nbenefit. \n Changing the centralized ad configuration must update every consuming UI/API. \n43. Admin Control Center — Admin-Proof Architecture \nThe existing VELoop Admin Dashboard must be able to monitor and configure the entire Tap & Earn system. Build a \ndedicated Tap & Earn admin module or expose a clean admin API for the existing dashboard. \nAdmin area Monitor/configure \nEconomy Config Probabilities, reward values/ranges, prices, multipliers, \ndurations, thresholds and limits \nTap Analytics Physical taps, effective taps, accepted/rejected taps, \nactive tappers, taps per hour/day \nRewards SVE/VE/Token/Gem/Spin issuance and distribution \nEnergy Consumption, recharge, capacity upgrades, Bank and \nShield usage \nUpgrades Purchases, active/expired upgrades and sink totals \nAds Opportunities, impressions, completion/failure and \nplacement performance \nAnti-Bot Rejected taps, rate violations, suspicious patterns and \nrisk flags \nTap League Current season, top 100, score distribution and reward \nstatus \nSeasons Start/end, active status, rollover/finalization \nReward Ledger Searchable user/system balance changes \nConfig Audit Admin, changed key, old value, new value, timestamp, \nreason \n \nNo economic value may be duplicated across files. Admin edits must validate, persist, audit and propagate through the \nsame configuration source. \n44. UI/UX — HIGHEST PRIORITY \nThe UI is the highest-priority part of this assignment because the user experiences Tap & Earn almost entirely through \nthe interface. The intern must treat visual quality, interaction feedback, responsiveness and clarity as functional \nrequirements. \n First viewport must clearly communicate VE balance, Energy, recharge countdown, Multitap, Tap Efficiency, Boost \nand the central Tap Circle. \n\n Central Tap Circle is the hero interaction and must feel physically responsive on every accepted tap. \n Every tap: press/compression animation + ripple/glow + reward float + subtle haptic feedback where supported. \n Use the supplied VE tap-circle concept as interaction inspiration while using VELoop's own #161827 fintech design \nlanguage. \n Use VE gold as the primary reward accent and blue as a secondary interaction accent. \n Do not make every card glow. Reserve stronger effects for active rewards, boosts, Lucky/Mystery events and the \nTap Circle. \n Use bottom sheets, drawers and focused modals for advanced systems so the first screen stays understandable. \n Every purchase must show cost, benefit, duration and expiry before confirmation. \n Every temporary feature must have a live countdown. \n Use consistent visual identity for SVE, VE, Tokens, Gems, Spins and Energy. \n Show a compact last-reward/history feedback area without forcing the user away from the tap screen. \n Loading, error, rejected tap, reconnecting and empty states must be designed—not plain text placeholders. \n Never freeze the Tap Circle while waiting for a network response; animate immediately and reconcile with \nauthoritative server state. \n Rejected taps should show subtle reasons such as Too Fast, Not Enough Energy or Cooldown Active. \n Touch targets must be mobile-friendly and the Tap Circle must not conflict with bottom navigation. \n Respect reduced-motion preferences where practical. \n Avoid casino-like effects, excessive particles, flashing, giant gradients or visual clutter. Target: engaging fintech, not \ncheap game UI. \n44.1 First-View Information Hierarchy \nPriority Information \n1 Tap Circle + current reward feedback \n2 Energy current/max + recharge countdown \n3 VE balance + level \n4 Multitap + Tap Efficiency \n5 Boost + countdown \n6 Daily Challenge + Missions \n7 Lucky/Spin + Energy Bank + Shield \n8 VE Fragments + Tap Season \n9 Tap League \n \n44.2 Tap Feedback Sequence \n1. User touches Tap Circle. \n2. Frontend immediately plays press animation and vibration where supported. \n3. Frontend begins the 200 ms interaction lock. \n4. Unique requestId is sent to backend. \n5. Backend validates authentication, timing, energy, Shield, anti-bot and season state. \n6. Backend performs one reward roll and applies configured Multitap/Efficiency/Boost rules. \n7. Backend atomically updates state and writes TapEvent + RewardLedger. \n8. Frontend receives authoritative response. \n9. Reward float displays exactly what was awarded. \n10. Balance, Energy, Combo, Streak and League progress animate to the returned state. \n\n45. Single-Source Configuration Architecture \nAll values below are examples of configuration keys, not duplicated constants. The intern must implement a single \nsource of truth. \n tapEconomy.reward.sve \n tapEconomy.reward.ve \n tapEconomy.reward.tokens \n tapEconomy.reward.gems \n tapEconomy.reward.spin \n tapEconomy.energy.baseCapacity \n tapEconomy.energy.recharge \n tapEconomy.energy.capacityTiers \n tapEconomy.multitap.tiers \n tapEconomy.rechargeSpeed.tiers \n tapEconomy.energyBank \n tapEconomy.energyShield \n tapEconomy.tapEfficiency.tiers \n tapEconomy.tapStreak \n tapEconomy.tapCombo \n tapEconomy.mysteryTap \n tapEconomy.luckyTap.spinRewards \n tapEconomy.ads \n tapEconomy.seasons \n tapEconomy.league.rewards \n tapEconomy.security \n46. Reliability, Precision and Concurrency \n Use integer smallest currency units or MongoDB Decimal128 for fractional balances; never rely on binary floating-\npoint arithmetic for authoritative balances. \n Use unique indexes for userId/requestId where replay protection requires them. \n Index TapEvent by userId + timestamp and seasonId + timestamp/score as appropriate. \n Tap processing must be atomic so simultaneous requests cannot double-spend Energy or double-award rewards. \n Configuration changes must not alter historical ledger events. \n Store timestamps in UTC; convert to local time only in the UI. \n Server time is authoritative for all cooldowns, recharge, expiry and seasons. \n State-changing endpoints should return authoritative resulting state or a version number for safe frontend \nreconciliation. \n47. Final UI Acceptance Checklist \n Premium, attractive first load; no generic template appearance. \n Tap Circle is dominant but does not hide important information. \n Tap feedback is visible immediately. \n Reward types are understandable at a glance. \n Energy and recharge state are instantly understandable. \n Multitap, Efficiency and Boost are visually distinct. \n Temporary features communicate expiry. \n Ads do not cause layout jumps or destroy the core interaction. \n\n Tap League feels competitive and polished with Top 3 and sticky My Rank. \n Mobile has no horizontal scrolling and controls are thumb-friendly. \n Desktop uses space naturally without oversized stretched cards. \n Loading, network failure, rejected tap and success states are designed. \n Animations are smooth, short and purposeful. \n The interface remains readable when multiple effects are active. \n Every visible economy value comes from backend state/configuration. \n48. Final Definition of Done \nThe feature is complete only when an authenticated user can tap, consume Energy, receive server-selected rewards, \npurchase and expire upgrades, use Boost/Bank/Shield/Efficiency, complete Missions and Daily Challenges, trigger \nMystery/Lucky mechanics, accumulate seasonal Tap League score, see Top 100 + My Rank, encounter the configurable \ndemo ad system, and have every economic event visible/auditable from the Admin Dashboard. The UI must be polished, \nresponsive, engaging and production-facing—not an intern prototype. \n \n \nProject Timeline s Submission Deadline \nTo ensure smooth project execution and timely review: \nProject Assigned On: 20 August 2026 \nProject Start Date: 20 August 2026 \nSubmission Deadline: 10 September 2026 \nSubmission Tine: 5:30 P.M. (IST) \n ",
+      "createdAt": "2026-09-02T15:01:40.681Z"
+    },
+    {
+      "_id": "fe0ac73e14737cf1d8415d0b",
+      "title": "Sahana_Resume.",
+      "fileName": "Sahana_Resume..pdf",
+      "fileUrl": "/uploads/1788361510157-673206844.pdf",
+      "fileSize": 62410,
+      "userId": "8302a651ab18c3ebf921a99f",
+      "status": "Ready",
+      "subject": "tell me about her achivements",
+      "extractedText": "\n\nSAHANA S ULLAGADDI\nsahanaullagaddi28@gmail.com | +91 8660361978 | Haveri, Karnataka | LinkedIn | GitHub\nPROFESSIONAL SUMMARY\nFinal-year Computer Science (AI & ML) undergraduate with strong software engineering fundamentals — DSA, OOP, distributed \nsystems, and database design. Experienced in building and shipping backend services and REST APIs for multi-agent and data-driven \nsystems, with a track record of reducing manual processing time by 40-50% through scalable system design. Recognized at multiple \nnational-level hackathons for engineering execution; active open-source contributor.\nTECHNICAL SKILLS\n●Languages: Python, C, JavaScript, SQL\n●Core CS: Data Structures & Algorithms, Object-Oriented Programming, Operating Systems, Computer Networks, DBMS\n●Backend & Systems: Flask, REST API Design, Distributed Systems, System Design Fundamentals, SQLite, Firebase\n●Tools & Cloud: Git, GitHub, Postman, AWS (basics), Firebase, Agile/Scrum/SDLC\n●Applied AI/ML: LangChain, Scikit-learn, OpenAI API, Gemini API, Multi-Agent Systems (used as domain context, not core \nfocus)\n●DSA Practice: 500+ problems solved on LeetCode\nPROFESSIONAL EXPERIENCE\nSoftware Engineering Intern — Swavik (Remote)Jan 2026 – Feb 2026\n●Built backend logic for a multi-agent automation platform, integrating 3+ data sources via REST APIs and designing the \norchestration flow that reduced manual decision-making time by 40%.\n●Owned the reasoning-service module end-to-end — API contracts, error handling, and integration testing — as part of a cross-\nfunctional engineering team; recognized as Top 3 Team for technical delivery.\nPROJECTS\nMulti-Agent Orchestration Platform for Business Process AutomationApr – Jun 2026\nPython, Flask, LangChain, SQLite, JavaScript, REST APIs, Chart.js\n●Engineered a backend orchestration layer coordinating 8 independent service agents across 5+ workflows, exposed via REST \nAPIs consumed by a real-time dashboard.\n●Designed the data layer and API contracts for inter-agent communication, prioritizing modularity and fault isolation so individual \nagent failures didn't cascade.\nMultilingual Classification Service — ARMOR AIFeb – Mar 2026\nPython, Flask, Scikit-learn, Firebase, REST APIs\n●Built and deployed a Flask-based classification service processing 500+ multilingual conversations into structured, queryable \ninsights, cutting manual analysis time by 50%.\n●Designed the data pipeline and Firebase schema for real-time ingestion and storage at scale.\nGraph-Based Prediction System for Drug Interaction RiskOct – Nov 2025\nPython, Graph Neural Networks, Bioinformatics Datasets\n●Developed and optimized a graph-based prediction pipeline handling 10,000+ combinations with 89% accuracy, focusing on data \npreprocessing efficiency and model serving performance.\nEDUCATION\nB.Tech – Computer Science (AI & ML), GM UniversityAug 2024 – Present\nHigher Secondary (Class 12) — B R Pu College, MotebennurCGPA: 92.16%\nSecondary (Class 10) — S F S English Medium High School, SavanurCGPA: 94.08%\nHACKATHONS & RECOGNITION\n●SKSVMCET National Level Hackathon (Mar 2026) — Best Project Award for a full-stack AI-integrated solution\n●Swavik Internship (Jan 2026) — Top 3 Team for technical delivery\n●RV University Ideathon (Nov 2025) — Top 10 Team for solution design and innovation\n●IIIT Dharwad Hackathon (Apr 2026) — Finalist for system architecture and execution\nOPEN SOURCE\n●Open Source Contributor, GirlScript Summer of Code (GSSoC) 2026 — merged pull requests improving codebase functionality \nand documentation",
+      "createdAt": "2026-09-02T15:05:10.162Z"
+    },
+    {
+      "_id": "b20c9c9581dffa025961394f",
+      "title": "resume",
+      "fileName": "Sahaana_resume.pdf",
+      "fileUrl": "/uploads/1788414904990-905256111.pdf",
+      "fileSize": 70739,
+      "userId": "9d31a4f746a012bee7804646",
+      "status": "Ready",
+      "subject": "General",
+      "extractedText": "\n\nSAHANA S ULLAGADDI\nsahanaullagaddi28@gmail.com | +91 8660361978 | Haveri, Karnataka | LinkedIn | GitHub\nPROFESSIONAL SUMMARY\nSoftware Engineer with cross-functional experience spanning backend systems, applied AI/ML, and full-stack delivery. Shipped \nREST APIs, multi-agent orchestration logic, and ML-backed production features across two internships, cutting manual processing \ntime by 40–50%. Strong foundation in DSA (500+ LeetCode), OOP, and distributed systems design, with a track record of \ntranslating research-adjacent AI work into deployable, user-facing systems. Recognized at 4 national-level hackathons.\nTECHNICAL SKILLS\n•Languages: Python, C, Java, JavaScript, SQL\n•Core CS: Data Structures & Algorithms, Object-Oriented Programming, Operating Systems, Computer Networks, DBMS\n•Backend & Systems: Flask, REST API Design, Distributed Systems, System Design Fundamentals, SQLite, Firebase\n•Frontend: HTML, CSS, JavaScript, responsive UI development\n•Tools & Cloud: Git, GitHub, GitHub Actions (CI/CD), Postman, AWS (basics), Firebase, Agile/Scrum/SDLC\n•Applied AI/ML: LangChain, Scikit-learn, OpenAI API, Gemini API, Multi-Agent Systems\n•DSA Practice: 500+ problems solved on LeetCode\nPROFESSIONAL EXPERIENCE\nAI/ML Intern — SwavikJan 2026 – Feb 2026\n•Reduced manual decision-making time by 40% by designing the multi-agent orchestration logic for an AI automation platform \nin Python, integrating 3+ data sources through REST API client-server contracts.\n•Improved agent decision accuracy and reduced integration defects by building and testing the reasoning logic for one of the \nplatform's automation agents, including error handling for concurrent multi-source data calls, recognized as Top 3 Team for \ntechnical delivery.\nFrontend Development Intern — UltimezAug 2026 – Sep 2026\n•Improved usability and interpretation speed for end users by building responsive front-end UI components and debugging data-\nrendering issues against a graph neural network (GNN) prediction backend, surfacing model outputs at 89% accuracy across \n10,000+ drug combinations.\n•Strengthened frontend-backend integration reliability by collaborating with the ML team to test and validate dashboard outputs \nagainst API responses, closing the loop between model predictions and the user-facing interface.\nPROJECTS\nMulti-Agent Orchestration Platform — Python, Flask, LangChain, SQLite, REST APIs\n•Coordinated 8 independent service agents across 5+ workflows through a fault-isolated microservices backend deployed with \ncloud-hosting basics on AWS, designing each agent as an independently failing unit so no single agent's downtime blocked the \nother 7 — exposing real-time state via REST APIs to a live dashboard.\nARMOR AI — Multilingual Classification Service — Python, Flask, Scikit-learn, Firebase\n•Cut manual analysis time 50% by building and deploying a Flask classification service with SQL-backed storage, processing \n500+ multilingual conversations into structured, queryable insights.\nDrug Interaction Risk Prediction (GNN) — Python, Graph Neural Networks\n•Achieved 89% accuracy across 10,000+ drug combinations with a graph-based prediction pipeline, optimized for preprocessing \nefficiency and low-latency model serving.\nEDUCATION\nB.Tech – Computer Science (AI & ML), GM UniversityExpected 2027\nHigher Secondary (Class 12) — B R Pu College, MotebennurCGPA: 92.16%\nSecondary (Class 10) — S F S English Medium High School, SavanurCGPA: 94.08%\nACHIEVEMENTS & OPEN SOURCE\n•Best Project Award — SKSVMCET National Hackathon (Mar 2026)\n•Top 3 Team — Swavik Internship, technical delivery (Jan 2026)\n•Finalist — IIIT Dharwad Hackathon, system architecture (Apr 2026)\n•Top 10 Team — RV University Ideathon, solution design (Nov 2025)\n•Open Source Contributor — GirlScript Summer of Code (GSSoC) 2026, merged PRs improving codebase functionality",
+      "createdAt": "2026-09-03T05:55:04.998Z"
+    },
+    {
+      "_id": "fcbb40675144f269a7a88a37",
+      "title": "grade sheet",
+      "fileName": "grade sheet.pdf",
+      "fileUrl": "/uploads/1788793022944-542517110.pdf",
+      "fileSize": 908649,
+      "userId": "9d31a4f746a012bee7804646",
+      "status": "Ready",
+      "subject": "General",
+      "extractedText": "\n\n",
+      "createdAt": "2026-09-07T14:57:05.249Z"
+    }
+  ],
+  "chatSessions": [
+    {
+      "_id": "0e38f0ca01ac025274fd59bb",
+      "userId": "8302a651ab18c3ebf921a99f",
+      "documentId": "bb69203481bcedee51b70915",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can i know about python",
+          "timestamp": "2026-09-02T14:56:47.387Z"
+        },
+        {
+          "role": "assistant",
+          "content": "[Mock Mode] You asked: \"can i know about python\".\nTo get real AI answers based on your notes, please add GEMINI_API_KEY or OPENAI_API_KEY to your .env file.\n(Context size available: 39278 characters)",
+          "timestamp": "2026-09-02T14:56:47.391Z"
+        }
+      ],
+      "createdAt": "2026-09-02T14:56:47.387Z"
+    },
+    {
+      "_id": "02523159a418be9281c1976b",
+      "userId": "8302a651ab18c3ebf921a99f",
+      "documentId": "fe0ac73e14737cf1d8415d0b",
+      "messages": [
+        {
+          "role": "user",
+          "content": "🏆 Tell me about her achievements & key highlights",
+          "timestamp": "2026-09-02T15:23:32.577Z"
+        },
+        {
+          "role": "assistant",
+          "content": "### 🏆 Achievements & Key Recognition Found in Notes\n\nBased on your uploaded document:\n\n* **SKSVMCET National Level Hackathon (Mar 2026) — Best Project Award for a full-stack AI-integrated solution**\n\n* **Swavik Internship (Jan 2026) — Top 3 Team for technical delivery**\n\n* **RV University Ideathon (Nov 2025) — Top 10 Team for solution design and innovation**\n\n* **IIIT Dharwad Hackathon (Apr 2026) — Finalist for system architecture and execution**\n\n* OPEN SOURCE\n\n* **Open Source Contributor, GirlScript Summer of Code (GSSoC) 2026 — merged pull requests improving codebase functionality**\n\n* and documentation\n\n*Extracted directly from your uploaded study material.*",
+          "timestamp": "2026-09-02T15:23:32.584Z"
+        }
+      ],
+      "createdAt": "2026-09-02T15:23:32.577Z"
+    },
+    {
+      "_id": "db289cb3fbdacd384a0cf615",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": null,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Can you give me another practical real-world example of Newton's Second Law?",
+          "timestamp": "2026-09-03T05:54:08.961Z"
+        },
+        {
+          "role": "assistant",
+          "content": "### StudyMate Academic Tutor\n\nRegarding **\"Can you give me another practical real-world example of Newton's Second Law?\"**:\n\n1. **Concept Overview**:\n   This is a fundamental topic in your curriculum. Focus on breaking down the core terminology, principles, and practical applications.\n\n2. **Active Recall Points**:\n   * Ensure you understand the underlying definitions before moving to complex exercises.\n   * Use the **Smart Flashcards** module to test your retention.\n   * Generate an **AI Quiz** to benchmark your knowledge.\n\n*Ask a follow-up question or upload more notes to explore specific sub-topics!*",
+          "timestamp": "2026-09-03T05:54:08.969Z"
+        }
+      ],
+      "createdAt": "2026-09-03T05:54:08.961Z"
+    },
+    {
+      "_id": "409821e37b062b284b37dd17",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "b20c9c9581dffa025961394f",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What skills are mentioned?",
+          "timestamp": "2026-09-07T15:20:43.851Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Based on your notes, here are the technical skills mentioned:\n\n* **Languages:** Python, C, Java, JavaScript, SQL\n* **Core Computer Science:** Data Structures & Algorithms (DSA), Object-Oriented Programming (OOP), Operating Systems, Computer Networks, DBMS\n* **Backend & Systems:** Flask, REST API Design, Distributed Systems, System Design Fundamentals, SQLite, Firebase\n* **Frontend:** HTML, CSS, JavaScript, Responsive UI Development\n* **Tools & Cloud:** Git, GitHub, GitHub Actions (CI/CD), Postman, AWS (basics), Firebase, Agile/Scrum/SDLC\n* **Applied AI/ML:** LangChain, Scikit-learn, OpenAI API, Gemini API, Multi-Agent Systems, Graph Neural Networks (GNN)\n* **Problem Solving / Practice:** 500+ DSA problems solved on LeetCode",
+          "timestamp": "2026-09-07T15:20:43.863Z"
+        }
+      ],
+      "createdAt": "2026-09-07T15:20:43.851Z"
+    }
+  ],
+  "quizzes": [
+    {
+      "_id": "9ffa83c7aa8e48fb83dfcd6b",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "b20c9c9581dffa025961394f",
+      "title": "Quiz: resume",
+      "questions": [
+        {
+          "questionText": "How many LeetCode problems has Sahana solved according to the resume?",
+          "options": [
+            "300+ problems",
+            "400+ problems",
+            "500+ problems",
+            "600+ problems"
+          ],
+          "correctAnswer": "500+ problems",
+          "explanation": "The resume states under DSA Practice and Professional Summary that she has solved 500+ problems on LeetCode."
+        },
+        {
+          "questionText": "During her internship at Swavik, by what percentage was manual decision-making time reduced?",
+          "options": [
+            "20%",
+            "30%",
+            "40%",
+            "50%"
+          ],
+          "correctAnswer": "40%",
+          "explanation": "The resume notes under Professional Experience for Swavik that she reduced manual decision-making time by 40%."
+        },
+        {
+          "questionText": "What accuracy was achieved by the Drug Interaction Risk Prediction (GNN) project?",
+          "options": [
+            "85%",
+            "89%",
+            "92%",
+            "95%"
+          ],
+          "correctAnswer": "89%",
+          "explanation": "The project description and frontend internship details state that the pipeline achieved 89% accuracy across 10,000+ drug combinations."
+        },
+        {
+          "questionText": "Which company did Sahana intern at as a Frontend Development Intern?",
+          "options": [
+            "Swavik",
+            "Ultimez",
+            "AWS",
+            "GirlScript"
+          ],
+          "correctAnswer": "Ultimez",
+          "explanation": "The resume lists her role as 'Frontend Development Intern — Ultimez' from August 2026 – September 2026."
+        },
+        {
+          "questionText": "How many national-level hackathons is Sahana recognized at?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "4",
+          "explanation": "The professional summary mentions she is recognized at 4 national-level hackathons."
+        }
+      ],
+      "attempts": [],
+      "createdAt": "2026-09-07T14:56:31.467Z"
+    },
+    {
+      "_id": "1a9868f27fe2f16ede61a66d",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Quiz: grade sheet",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:00:06.424Z"
+    },
+    {
+      "_id": "d42a258eeba9cd2108be9371",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Quiz: grade sheet",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:05:32.963Z"
+    },
+    {
+      "_id": "64cf0a5e697b423ac0f36949",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Quiz: grade sheet",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:06:25.705Z"
+    },
+    {
+      "_id": "8c5d8b782214a812027945e6",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Quiz: grade sheet",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:07:35.233Z"
+    },
+    {
+      "_id": "3914e646ad4d4a402313d6ef",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Quiz: grade sheet",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:08:30.398Z"
+    },
+    {
+      "_id": "055f9fd80c77a58d62c03c3f",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Quiz: grade sheet",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:09:26.644Z"
+    },
+    {
+      "_id": "a362c0944ac89487b2f38a6b",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Quiz: grade sheet",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:10:26.601Z"
+    },
+    {
+      "_id": "092f8fbdfd2d16e442cdfb40",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Quiz: grade sheet",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:11:23.804Z"
+    },
+    {
+      "_id": "c9bbc25cabc8aeba5e5f6033",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Quiz: grade sheet",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:12:23.804Z"
+    },
+    {
+      "_id": "650d865100c9961067df2c23",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Test Quiz",
+      "questions": [],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:18:03.347Z"
+    },
+    {
+      "_id": "dda8cb3e06c270a0ad0ff78e",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "b20c9c9581dffa025961394f",
+      "title": "Resume Quiz",
+      "questions": [
+        {
+          "questionText": "During her AI/ML Internship at Swavik, by what percentage did Sahana reduce manual decision-making time?",
+          "options": [
+            "30%",
+            "40%",
+            "50%",
+            "89%"
+          ],
+          "correctAnswer": "40%",
+          "explanation": "According to the Swavik experience section, she 'Reduced manual decision-making time by 40% by designing the multi-agent orchestration logic for an AI automation platform in Python'."
+        },
+        {
+          "questionText": "In the 'Multi-Agent Orchestration Platform' project, how many independent service agents were coordinated across 5+ workflows?",
+          "options": [
+            "3",
+            "5",
+            "8",
+            "10"
+          ],
+          "correctAnswer": "8",
+          "explanation": "The project description specifies that she 'Coordinated 8 independent service agents across 5+ workflows through a fault-isolated microservices backend'."
+        },
+        {
+          "questionText": "What accuracy rate was achieved by the Drug Interaction Risk Prediction (GNN) model across 10,000+ drug combinations?",
+          "options": [
+            "50%",
+            "89%",
+            "92.16%",
+            "94.08%"
+          ],
+          "correctAnswer": "89%",
+          "explanation": "The resume states for the Drug Interaction Risk Prediction project that it 'Achieved 89% accuracy across 10,000+ drug combinations with a graph-based prediction pipeline'."
+        },
+        {
+          "questionText": "Which project involved building a Flask classification service with SQL-backed storage to process 500+ multilingual conversations?",
+          "options": [
+            "ARMOR AI",
+            "Multi-Agent Orchestration Platform",
+            "Drug Interaction Risk Prediction (GNN)",
+            "GirlScript Summer of Code"
+          ],
+          "correctAnswer": "ARMOR AI",
+          "explanation": "The 'ARMOR AI — Multilingual Classification Service' project details cutting manual analysis time by 50% by building and deploying a Flask classification service processing 500+ multilingual conversations."
+        },
+        {
+          "questionText": "At which event did Sahana win the 'Best Project Award' in March 2026?",
+          "options": [
+            "IIIT Dharwad Hackathon",
+            "RV University Ideathon",
+            "SKSVMCET National Hackathon",
+            "Swavik Internship Technical Showcase"
+          ],
+          "correctAnswer": "SKSVMCET National Hackathon",
+          "explanation": "Under Achievements & Open Source, the resume lists 'Best Project Award — SKSVMCET National Hackathon (Mar 2026)'."
+        }
+      ],
+      "attempts": [],
+      "createdAt": "2026-09-07T15:21:19.870Z"
+    }
+  ],
+  "flashcardSets": [
+    {
+      "_id": "a199d61f3435c80477d8abff",
+      "userId": "8302a651ab18c3ebf921a99f",
+      "documentId": "bb69203481bcedee51b70915",
+      "title": "Flashcards: Tap_Earn_Page_task_Full_Stack",
+      "cards": [
+        {
+          "_id": "46250cc1d073031353c7cfea",
+          "front": "Active Recall",
+          "back": "A learning principle where you stimulate memory retrieval by actively testing yourself rather than passively rereading notes.",
+          "mastered": true,
+          "reviewCount": 1
+        },
+        {
+          "_id": "95e6feab3bebe56c49a1650c",
+          "front": "Spaced Repetition",
+          "back": "A learning technique where reviews of study material are scheduled at increasing intervals to combat the forgetting curve.",
+          "mastered": false,
+          "reviewCount": 1
+        },
+        {
+          "_id": "756ec37b9b2d62d0c49c1828",
+          "front": "Retrieval Practice",
+          "back": "The act of recalling information from your mind, which strengthens long-term memory pathways.",
+          "mastered": false,
+          "reviewCount": 1
+        },
+        {
+          "_id": "16fd329c524a049b5493e6cc",
+          "front": "RAG (Retrieval-Augmented Generation)",
+          "back": "An AI architecture that retrieves relevant document chunks first and feeds them to the LLM to ground responses in specific material.",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "aacb39f072781413228b1e6b",
+          "front": "pdf-parse",
+          "back": "A Node.js library used by StudyMate AI to extract raw text content from uploaded PDF files on the fly.",
+          "mastered": false,
+          "reviewCount": 0
+        }
+      ],
+      "createdAt": "2026-09-02T15:06:06.310Z"
+    },
+    {
+      "_id": "5b64532ee326bfdbff5ebe8f",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "b20c9c9581dffa025961394f",
+      "title": "Flashcards: resume",
+      "cards": [
+        {
+          "_id": "d9110f6dfc02e24130cebd6d",
+          "front": "•Languages",
+          "back": "Python, C, Java, JavaScript, SQL",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "043944c39f5842de63ae1ffa",
+          "front": "•Core CS",
+          "back": "Data Structures & Algorithms, Object-Oriented Programming, Operating Systems, Computer Networks, DBMS",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "5b991212dbaf4b4625b06eb8",
+          "front": "•Backend & Systems",
+          "back": "Flask, REST API Design, Distributed Systems, System Design Fundamentals, SQLite, Firebase",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "535ff51d047d9bf86a84caad",
+          "front": "•Frontend",
+          "back": "HTML, CSS, JavaScript, responsive UI development",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "4304bc2cf6709b1686fcd756",
+          "front": "•Tools & Cloud",
+          "back": "Git, GitHub, GitHub Actions (CI/CD), Postman, AWS (basics), Firebase, Agile/Scrum/SDLC",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "051bd584bf6f21b1a65c853f",
+          "front": "•Applied AI/ML",
+          "back": "LangChain, Scikit-learn, OpenAI API, Gemini API, Multi-Agent Systems",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "9cbb5f4d11d562e979090368",
+          "front": "•DSA Practice",
+          "back": "500+ problems solved on LeetCode",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "33a90a47de7c9e5c67337dc7",
+          "front": "AI/ML Intern",
+          "back": "SwavikJan 2026 – Feb 2026",
+          "mastered": false,
+          "reviewCount": 0
+        }
+      ],
+      "createdAt": "2026-09-07T14:58:37.723Z"
+    },
+    {
+      "_id": "c3ff76c7c0168cd3e3c7356c",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "fcbb40675144f269a7a88a37",
+      "title": "Test Flashcards",
+      "cards": [],
+      "createdAt": "2026-09-07T15:18:06.843Z"
+    },
+    {
+      "_id": "2c046d6ec42bc2efdc045b40",
+      "userId": "9d31a4f746a012bee7804646",
+      "documentId": "b20c9c9581dffa025961394f",
+      "title": "Resume Cards",
+      "cards": [
+        {
+          "_id": "f9b8026bd3572ba108147191",
+          "front": "Sahana S Ullagaddi",
+          "back": "Software Engineer with cross-functional experience in backend systems, applied AI/ML, and full-stack delivery, holding a B.Tech in Computer Science (AI & ML) from GM University (Expected 2027).",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "0f2b4d2348657ce3bfcfe4b9",
+          "front": "Programming Languages & Core CS",
+          "back": "Python, C, Java, JavaScript, SQL; strong foundation in DSA (500+ LeetCode), OOP, Operating Systems, Computer Networks, and DBMS.",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "08d290eeb275fa7795f05136",
+          "front": "AI/ML Intern at Swavik",
+          "back": "Designed multi-agent orchestration logic in Python, integrating 3+ data sources via REST APIs and reducing manual decision-making time by 40%.",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "479ebf8410b36f87f5536d63",
+          "front": "Frontend Development Intern at Ultimez",
+          "back": "Built responsive front-end UI components and debugged data-rendering issues against a GNN prediction backend, surfacing model outputs at 89% accuracy across 10,000+ drug combinations.",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "4187979b347e584d28c5b470",
+          "front": "Multi-Agent Orchestration Platform",
+          "back": "A project built with Python, Flask, LangChain, SQLite, and REST APIs that coordinated 8 independent service agents across 5+ workflows through a fault-isolated microservices backend on AWS.",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "21d3d220325140bdf9d78e34",
+          "front": "ARMOR AI",
+          "back": "A multilingual classification service built with Python, Flask, Scikit-learn, and Firebase that processed 500+ multilingual conversations into structured, queryable insights, cutting manual analysis time by 50%.",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "74a506108dac28dee50c995f",
+          "front": "Drug Interaction Risk Prediction (GNN)",
+          "back": "A graph-based prediction pipeline achieving 89% accuracy across 10,000+ drug combinations, optimized for preprocessing efficiency and low-latency model serving.",
+          "mastered": false,
+          "reviewCount": 0
+        },
+        {
+          "_id": "8631150f31b4df9901cd4799",
+          "front": "Key Achievements",
+          "back": "Best Project Award at SKSVMCET National Hackathon, Top 3 Team at Swavik Internship, Finalist at IIIT Dharwad Hackathon, Top 10 Team at RV University Ideathon, and GSSoC 2026 Open Source Contributor.",
+          "mastered": false,
+          "reviewCount": 0
+        }
+      ],
+      "createdAt": "2026-09-07T15:21:23.232Z"
+    }
+  ]
+}
