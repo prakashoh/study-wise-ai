@@ -1,6 +1,8 @@
 // API helper client to communicate with Express server
-
-const API_BASE = "/api";
+const RAW_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD ? "https://study-wise-ai-production.up.railway.app" : "");
+const API_BASE = RAW_URL ? `${RAW_URL.replace(/\/$/, "")}/api` : "/api";
 
 function getHeaders(isMultipart = false): HeadersInit {
   const token = localStorage.getItem("token");
