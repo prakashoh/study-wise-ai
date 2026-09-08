@@ -1,7 +1,11 @@
 // API helper client to communicate with Express server
-const RAW_URL =
-  import.meta.env.VITE_API_URL ||
-  (import.meta.env.PROD ? "https://study-wise-ai-production.up.railway.app" : "");
+let RAW_URL = (import.meta.env.VITE_API_URL || "").trim();
+const match = RAW_URL.match(/https?:\/\/[^\s]+/);
+if (match) {
+  RAW_URL = match[0];
+} else if (import.meta.env.PROD && !RAW_URL) {
+  RAW_URL = "https://study-wise-ai-production.up.railway.app";
+}
 const API_BASE = RAW_URL ? `${RAW_URL.replace(/\/$/, "")}/api` : "/api";
 
 function getHeaders(isMultipart = false): HeadersInit {
